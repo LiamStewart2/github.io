@@ -1,0 +1,131 @@
+body{
+    margin:0px;
+    text-decoration: none;
+    font-family:"Abel";
+    height:100vh;
+    overflow-x: hidden;
+}
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+nav{
+    background-color:rgb(24, 32, 58);
+    padding:0px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav a{
+    color:white;
+    padding:10px;
+    font-size:15px;
+}
+nav a:hover{
+    text-decoration: underline;
+}
+
+nav .LiamStewart{
+    font-size:18px;
+}
+nav .curve{
+    content:"";
+    height:50px;
+    width:50px;
+    border-radius: 50%;
+    background: transparent;
+    border:2px solid white;
+    display:flex;
+}
+nav .float-right{
+    display:flex;
+    gap:10px;
+    border-left: 1px solid white;
+}
+
+
+.division{
+    height:2px;
+    width:100%;
+    background-color: rgb(113, 113, 113);
+}
+
+
+
+.about-me{
+    background-color: white;
+    color:black;
+    margin:25px 20% 30px 20%;
+}
+.about-me h2{
+    text-align: center;
+    font-size:44px;
+    padding:10px;
+    margin:0px;
+}
+.about-me p{
+    text-align: center;
+    font-size:17px;
+}
+
+
+
+.personal-projects{
+    padding:0px 20% 30px 20%;
+}
+.personal-projects h2{
+    padding:20px;
+}
+
+
+
+.project-list ul{
+    display:flex;
+    justify-content: center;
+    list-style: none;
+    padding:0;
+}
+.project-list li{
+    padding:40px;
+    transition: transform 0.1s ease-out;
+}
+.project-list li:hover{
+    transform: translate(0, -20px);
+}
+.project-list img{
+    width:250px;
+    height:250px;
+    padding:0px;
+    margin:0px;
+    border: 1px solid lightgray;
+}
+.project-list p{
+    padding:5px;
+    margin:0px
+}
+
+
+footer{
+    margin:0px;
+    padding: 3px;
+    background-color:rgb(24, 32, 58);
+    color: white;
+    text-align: center;
+    width:100vw;
+    overflow-x: hidden;
+}
+footer ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+footer li{
+    padding: 0px 5px;
+}
+footer a{
+    color: inherit;
+}
+footer a:hover{
+    text-decoration: underline;
+}
