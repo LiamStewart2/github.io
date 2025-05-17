@@ -110,17 +110,17 @@ body{
 .project-section h3{
     text-align:center;
     padding:0px;
-    margin:50px 50px 30px 100px;
+    margin:50px 0px 30px 0px;
 }
 
 
 .project{
     min-width:300px;
-    max-width:500px;
+    max-width:400px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
     border:2px solid white;
     border-radius: var(--bold-border-radius);
-    margin:30px;
+    margin:20px;
     transition: 0.2s;
 }
 
@@ -251,4 +251,72 @@ body{
     margin:15px;
     font-weight: 300;
     font-size:medium;
+}
+
+
+.my-games-list{
+    padding:20px;
+    margin:100px 0px;
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+}
+
+.my-games-list .games-list{
+    display:flex;
+    justify-content:center;
+}
+ 
+.my-games-list .games-list div{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    padding:20px;
+    margin:15px 50px;
+}
+
+.my-games-list h3{
+    padding:15px;
+    margin:0px;
+}
+
+.my-games-list h4{
+    padding:0px;
+    margin:0px;
+    font-size:large;
+    font-weight: 500;
+}
+
+.my-games-list ul li{
+    font-size:medium;
+    font-weight: 400;
+    transition:0.2s;
+}
+
+.my-games-list ul li:hover{
+    margin-left:15px;
+}
+
+.footer{
+    display:flex;
+    justify-content: center;;
+}
+
+.contacts-section{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    width:fit-content;
+    padding:20px;
+}
+
+.contacts-section h3{
+    padding:0px;
+    margin:0px;
+    font-size:larger;
+    font-weight:600;
+}
+
+.contacts-section ul{
+    list-style: none;
 }
