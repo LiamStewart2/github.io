@@ -3,11 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
-    
+    <a href="../index.html" class="PP_back-button">Home</a>
+    <a class="PP_github-button">Github</a>
+    <div class="content">
+        <div class="PP_project-introduction-section">
+            <h1>Voxel Renderer</h1>
+            <div class="seperation-line"></div>
+            <p><i>Recreating the Minecraft Renderer</i></p>
+        </div>
+
+
+        <div class="PP_project-overview">
+            <video loop autoplay muted>
+                <source src="../Assets/Videos/2025-05-15 13-25-44.mp4" type="video/mp4">
+                Your browser doesnt support the video tag
+            </video>
+            <div class="PP_project-description">
+                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. The first attempt was unorganized, unoptimized and architected poorly, so for this second attempt i thoroughly researched the topic of voxels before hand and proplerly planned how i wished to architect the project.</p>
+                <p>In my first system, each block was an individual mesh. Meshes that where hidden by other blocks where culled, but still required thousands of draw calls a frame. This works poorly with the GPU which is optimised for fewer draw calls passing more data in at a time.</p>
+                <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendererd together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the conifguration.</p>
+                <p>Another system implemented in this version is a texture atlas. This means each face of the mesh can be rendererd without needing to take breaks for different voxel types.</p>
+                <p>The generated terrain uses a perlin noise implementation to span very large distances without the need of manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other</p>
+                <p>If i was to work on this proejct further, the first change i would work on would be the addition of trees. My first attempt had poor excuses for trees, but i would like a system that allows for procedual trees.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

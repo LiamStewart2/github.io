@@ -324,3 +324,73 @@ body{
 .contacts-section ul{
     list-style: none;
 }
+
+
+
+.PP_project-introduction-section{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    text-align: center;
+}
+
+.PP_project-introduction-section p{
+    font-weight: 400;
+}
+
+.PP_back-button{
+    position:absolute;
+    top: 10px;
+    left: 10px;
+    padding:2px 5px;
+    text-decoration: none;
+    color:white;
+    box-shadow: 3px 3px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    transition:0.2s;
+    font-weight:300;
+}
+
+.PP_back-button:hover{
+    color:var(--hover-accent);
+    box-shadow: 3px 3px 2px 1px var(--hover-accent);
+    border:2px solid var(--hover-accent);
+}
+
+.PP_github-button{
+    position:absolute;
+    top: 10px;
+    right: 10px;
+    padding:2px 5px;
+    text-decoration: none;
+    color:white;
+    box-shadow: 3px 3px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    transition:0.2s;
+    font-weight:300;
+}
+
+.PP_github-button:hover{
+    color:var(--hover-accent);
+    box-shadow: 3px 3px 2px 1px var(--hover-accent);
+    border:2px solid var(--hover-accent);
+}
+
+.PP_project-overview{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    text-align: center;
+    align-items: center;
+    margin:40px 0px;
+    padding:10px;
+}
+
+.PP_project-overview video{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    margin:20px;
+}
