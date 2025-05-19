@@ -394,3 +394,10 @@ body{
     border-radius: var(--bold-border-radius);
     margin:20px;
 }
+
+.PP_project-description-content{
+    height:0px;
+    overflow-y:hidden;
+}
+
+.PP_project-description-content :
