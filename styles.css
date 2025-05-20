@@ -122,6 +122,7 @@ body{
     border-radius: var(--bold-border-radius);
     margin:20px;
     transition: 0.2s;
+    cursor:pointer;
 }
 
 .project .link a{
@@ -394,10 +395,3 @@ body{
     border-radius: var(--bold-border-radius);
     margin:20px;
 }
-
-.PP_project-description-content{
-    height:0px;
-    overflow-y:hidden;
-}
-
-.PP_project-description-content :
