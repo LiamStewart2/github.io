@@ -432,6 +432,20 @@ body{
     transition: 0.2s;
 }
 
+.PP_project-section-title{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.PP_project-section-title i{
+    margin-left:auto;
+    margin-right:20px;
+    padding:10px;
+}
+.PP_project-section-title h3{
+    margin-left:30px;
+}
+
 .PP_project-description-content{
     max-height:0px;
     overflow: hidden;

@@ -29,6 +29,7 @@
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Solution</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
                         <p>In my first system, each block was an individual mesh. Meshes that where hidden by other blocks where culled, but still required thousands of draw calls a frame. This works poorly with the GPU which is optimised for fewer draw calls passing more data in at a time.</p>
@@ -40,6 +41,7 @@
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Texture Atlas</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
                         <img src="../Assets/Photos/blockAtlas.png">    
@@ -52,6 +54,7 @@
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Terrain Generation</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
                         <p>The generated terrain uses a <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise</a> implementation to span very large distances without the need of manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other</p>
@@ -59,7 +62,16 @@
                         <p>This is a very simple usage of perlin noise, and has the issue where a border is formed every 128 chunks, however the generation still expands infinitely, essentially looping the generated terrain there onwards.</p>
                     </div>
                 </div>
-                <p>If i was to work on this proejct further, the first change i would work on would be the addition of trees. My first attempt had poor excuses for trees, but i would like a system that allows for procedual trees.</p>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Expansion</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>If i was to work on this project further, the first change i would work on would be the addition of trees. My first attempt did have trees, however they where done in a way where they wherent consistent, using the inbuilt rand function to determine where to place them. They also where very simply implemented always having the same shape. Preferably i would want a more procedual approach.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
