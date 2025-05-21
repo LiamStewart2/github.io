@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
+    <script src="../script.js"></script>
     <title>Document</title>
 </head>
 <body>
     <a href="../index.html" class="PP_back-button">Home</a>
-    <a class="PP_github-button">Github</a>
+    <a href="https://github.com/LiamStewart2/Minecraft-Recreation" class="PP_github-button">Github</a>
     <div class="content">
         <div class="PP_project-introduction-section">
             <h1>Voxel Renderer</h1>
@@ -27,15 +28,37 @@
                 <p>This was my second attempt at a voxel renderer using C++ and OpenGL. The first attempt was unorganized, unoptimized and architected poorly, so for this second attempt i thoroughly researched the topic of voxels before hand and proplerly planned how i wished to architect the project.</p>
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3>Solution</h3>
+                        <h3><u>Solution</u></h3>
                     </div>
                     <div class="PP_project-description-content">
                         <p>In my first system, each block was an individual mesh. Meshes that where hidden by other blocks where culled, but still required thousands of draw calls a frame. This works poorly with the GPU which is optimised for fewer draw calls passing more data in at a time.</p>
                         <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendererd together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the conifguration.</p>
+                        <img src="../Assets/Photos/Voxel-Renderer-Diagram.png">
                     </div>
                 </div>
-                <p>Another system implemented in this version is a texture atlas. This means each face of the mesh can be rendererd without needing to take breaks for different voxel types.</p>
-                <p>The generated terrain uses a perlin noise implementation to span very large distances without the need of manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other</p>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Texture Atlas</u></h3>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <img src="../Assets/Photos/blockAtlas.png">    
+                        <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendererd without needing to take breaks for different voxel types.</p>
+                        <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
+                        <img src="../Assets/Photos/TextureAtlasUsage.png">
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Terrain Generation</u></h3>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>The generated terrain uses a <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise</a> implementation to span very large distances without the need of manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other</p>
+                        <img src="../Assets/Photos/Generate Chunk.png">
+                        <p>This is a very simple usage of perlin noise, and has the issue where a border is formed every 128 chunks, however the generation still expands infinitely, essentially looping the generated terrain there onwards.</p>
+                    </div>
+                </div>
                 <p>If i was to work on this proejct further, the first change i would work on would be the addition of trees. My first attempt had poor excuses for trees, but i would like a system that allows for procedual trees.</p>
             </div>
         </div>

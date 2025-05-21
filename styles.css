@@ -51,6 +51,7 @@ body{
 
 .top-bar-links a{
     transition:0.2s;
+    color:white;
 }
 
 .top-bar-links a:hover{
@@ -92,6 +93,14 @@ body{
     box-shadow: 2px 2px 2px 1px var(--hover-accent);
 }
 
+.navigation ul li a{
+    color:white;
+    text-decoration: none;
+    transition:0.2s;
+}
+.navigation ul li a:hover{
+    color:var(--hover-accent);
+}
 
 .project-section{
     padding:0px;
@@ -186,6 +195,7 @@ body{
     transition: 0.2s;
     margin-right:15px;
     margin-left:auto;
+    color:white;
 }
 .github:hover{
     color:var(--hover-accent);
@@ -390,8 +400,48 @@ body{
 }
 
 .PP_project-overview video{
+    max-width:700px;
+    min-width:300px;
+    height:auto;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
     border:2px solid white;
     border-radius: var(--bold-border-radius);
     margin:20px;
+}
+
+.PP_project-section{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    margin:20px;
+    cursor:pointer;
+}
+
+.PP_project-section:hover{
+    box-shadow: 5px 5px 2px 1px var(--hover-accent);
+    border:2px solid var(--hover-accent);
+    transition: 0.2s;
+}
+
+.PP_project-description-content{
+    max-height:0px;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+}
+
+.PP_project-description-content img{
+    max-width: 1000px;
+    height:auto;
+    margin:10px;
+    box-shadow: 3px 3px 3px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: 10px;
+}
+
+.PP_project-description-content a{
+    color:white;
+}
+
+.PP_project-description-content a:hover{
+    color:var(--hover-accent);
 }
