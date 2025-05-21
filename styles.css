@@ -1,7 +1,7 @@
 :root{
     --hover-accent: rgb(144, 255, 100);
-
     --bold-border-radius: 3px;
+    scroll-behavior: smooth;
 }
 
 body{
@@ -98,7 +98,7 @@ body{
     text-decoration: none;
     transition:0.2s;
 }
-.navigation ul li a:hover{
+.navigation ul li:hover a{
     color:var(--hover-accent);
 }
 
@@ -244,6 +244,7 @@ body{
 }
 
 .tech-stack-list ul li:hover{
+    color:var(--hover-accent);
     box-shadow: 2px 2px 2px 1px var(--hover-accent);
     border:2px solid var(--hover-accent);
 }
@@ -312,6 +313,10 @@ body{
     margin-left:15px;
 }
 
+.games-section{
+    width:250px;
+}
+
 .footer{
     display:flex;
     justify-content: center;;
@@ -330,10 +335,14 @@ body{
     margin:0px;
     font-size:larger;
     font-weight:600;
+    text-align: center;
 }
 
 .contacts-section ul{
     list-style: none;
+}
+.contacts-section ul li a{
+    font-weight: 500;
 }
 
 
