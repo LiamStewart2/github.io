@@ -25,14 +25,14 @@
                 Your browser doesnt support the video tag
             </video>
             <div class="PP_project-description">
-                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. The first attempt was unorganized, unoptimized and architected poorly, so for this second attempt i thoroughly researched the topic of voxels before hand and proplerly planned how i wished to architect the project.</p>
+                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. My first version lacked structure, performance and proper architectural design. For this second attempt i thoroughly researched the topic of voxels before hand and proplerly planned how i wished to architect the project.</p>
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Solution</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>In my first system, each block was an individual mesh. Meshes that where hidden by other blocks where culled, but still required thousands of draw calls a frame. This works poorly with the GPU which is optimised for fewer draw calls passing more data in at a time.</p>
+                        <p>In my first system, each block was its own mesh. Whilst hidden faces where still culled, the renderer still issued thousands of draw calls a frame - an inefficient approach as modern GPU's are optimized for fewer, larger draw calls.</p>
                         <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendererd together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the conifguration.</p>
                         <img src="../Assets/Photos/Voxel-Renderer-Diagram.png">
                     </div>
