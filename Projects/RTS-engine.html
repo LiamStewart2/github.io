@@ -1,102 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../styles.css" />
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
-    <title>Document</title>
+    <title>RTS Engine Project</title>
 </head>
 <body>
-    <a href="../index.html" class="PP_back-button">Home</a>
-    <a href="https://github.com/TheEmperorsArmoury/TheGreatWar" class="PP_github-button">Github</a>
-    <div class="content">
-        <div class="PP_project-introduction-section">
+    <nav>
+        <a href="../index.html" class="PP_back-button">Home</a>
+        <a href="https://github.com/TheEmperorsArmoury/TheGreatWar" class="PP_github-button">GitHub</a>
+    </nav>
+
+    <main class="content">
+        <section class="PP_project-introduction-section">
             <h1>RTS Engine</h1>
             <div class="seperation-line"></div>
-            <p><i>Creating a lightweight RTS Engine</i></p>
-        </div>
+            <p><i>Creating a lightweight RTS engine</i></p>
+        </section>
 
-
-        <div class="PP_project-overview">
+        <section class="PP_project-overview">
             <video loop autoplay muted>
-                <source src="../Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4">
-                Your browser doesnt support the video tag
+                <source src="../Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4" />
+                Your browser doesn't support the video tag.
             </video>
+
             <div class="PP_project-description">
-                <p>This was my first group project, working with a team of volunteer developers to build an RTS game engine using the SFML library and C++. I was primarly responsible for the agents and rendering systems. Throughout development alot of members of the team came and went, however i worked with the team lead throughout.</p>
-                
+                <p>This was my first group project, where I collaborated with a team of volunteer developers to build an RTS game engine using C++ and the SFML library. I was primarily responsible for the agents and rendering systems. Many team members came and went during development, but I worked closely with the team lead throughout the project.</p>
+
+                <!-- GitHub Section -->
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>GitHub</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/Branch.png">    
-                        <p>Being my first group project, this is when i first learnt how to use gits primary colloboration features. Our team used <a href="https://github.com/">github</a> to host our repository, and each person work was done in a seperate branch.</p>
-                        <p>I spent the first few weeks of the project primarly focusing on how to utlize and navigate git, learning alot of the command and setting up the different requirements.</p>
+                        <img src="../Assets/Photos/Branch.png" alt="Git branching diagram" />
+                        <p>As this was my first group project, it was also my first time using Git's collaboration features. Our team used <a href="https://github.com/">GitHub</a> to host the repository, with each contributor working in a separate branch.</p>
+                        <p>I spent the first few weeks learning Git in-depth—getting familiar with key commands, resolving merge conflicts, and organizing branch structures for team efficiency.</p>
                     </div>
                 </div>
 
+                <!-- Agents Section -->
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Agents</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/baronTemp (2).png">
-                        <p>My first large task was building the agents system. The two main parts of this task was the agents themselves and the Agent Manager. The agents changed alot throughout development, but the core concept using inheritance to place agents any where on the world stayed the same.</p>
-                        <p>Every entity in the world is an agent; the trees, the planes, and there where intenetions to extend the engine to have interactable agents such as structures. Some of these could move and others couldnt, and there was alot of unique functionality for each.</p>
-                        <p>For this reason i decided to use a hiearchy of <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">inheritance</a> for each different agent.</p>
-                        <img src="../Assets/Photos/RTS-Agents-Diagram.png">
-                        <p>These are then inserted into the data structure another programmer developed, a <a href="https://en.wikipedia.org/wiki/Quadtree">quad tree</a>, where they can be referenced to render or update.</p>
-                        <img src="../Assets/Photos/PlaceAgentCode.png">
+                        <img src="../Assets/Photos/baronTemp (2).png" alt="Plane agent in-game screenshot" />
+                        <p>My first major task was developing the agent system. The system consisted of two main parts: the agents themselves and an Agent Manager. While the implementation evolved over time, the core idea—using inheritance to represent all world entities—remained constant.</p>
+                        <p>Every object in the world (trees, planes, future structures) was treated as an agent. Some could move, others were static, and each required unique behavior. To support this variety, I implemented an inheritance-based class hierarchy.</p>
+                        <img src="../Assets/Photos/RTS-Agents-Diagram.png" alt="Agent inheritance diagram" />
+                        <p>Agents were stored in a <a href="https://en.wikipedia.org/wiki/Quadtree">quadtree</a> structure developed by another programmer, which allowed for efficient spatial queries during rendering and updates.</p>
+                        <img src="../Assets/Photos/PlaceAgentCode.png" alt="Agent placement code snippet" />
                     </div>
                 </div>
 
+                <!-- Isometric Terrain Section -->
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Isometric Terrain</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                    
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/grass_spritesheet.png">
-                        <p>I was also responsible for building the isometric terrain system. The project already had utility functions to convert an isometric world space to screen space and vise versa, but we needed a system to fill the quadtree with references to terrain texture coordinates.</p>
-                        <p>This came with alot of steps. After alot of iteration we decided to use JSON to store the map data, using a terrain height array and a terrain type array. To build this JSON file i used a small python tool to procedually generate the heights and terrain types, which could have been used more to create numerous map types.</p>
-                    
-                        <p>Loading the height maps: </p>
-                        <img src="../Assets/Photos/heightmaploading.png">
-                        <p>Loading the terrain types wasnt as simple however. I decided to use a hashmap which lets me access different terrain spritesheets using a key which is what is stored in the JSON file.</p>
-                        <img src="../Assets/Photos/TerrainType.png">
-                        <p>The last part was figuring out which direction of the spritesheet to use, having to work out what the heights out surrounding terrains tiles where and choosing the corresponding direction enum accordingly. Most of this is just if statements so most code is removed for the sake of keeping the page clean.</p>
-                        <img src="../Assets/Photos/directionmapcode.png">
-                        <p>If i was to rework this section or make another RTS engine, i would likely choose to use an orthographic 3D system, having a generated height map of nodes and then connecting them together to make a mesh and blend textures to get smoother terrains.</p>
+                        <img src="../Assets/Photos/grass_spritesheet.png" alt="Grass tile spritesheet" />
+                        <p>I was also responsible for the isometric terrain system. While utility functions already existed to convert between world and screen space, we needed a system to associate terrain tiles in the quadtree with their texture data.</p>
+                        <p>We used a combination of JSON files and a Python tool to procedurally generate maps. These files included both terrain height and type arrays.</p>
+                        <p>Loading the height map:</p>
+                        <img src="../Assets/Photos/heightmaploading.png" alt="Code snippet for loading terrain heights" />
+                        <p>For terrain types, I used a hash map that linked terrain keys in the JSON to corresponding spritesheets, allowing flexible and extensible terrain rendering.</p>
+                        <img src="../Assets/Photos/TerrainType.png" alt="Hashmap terrain type system" />
+                        <p>To determine which tile to use from the spritesheet, I evaluated the height of neighboring tiles to pick the correct directional variant. Most of this logic is implemented through conditional statements.</p>
+                        <img src="../Assets/Photos/directionmapcode.png" alt="Directional mapping code snippet" />
+                        <p>If I were to rebuild the terrain system, I would likely switch to an orthographic 3D approach using a mesh generated from heightmaps, with texture blending for smoother terrain transitions.</p>
                     </div>
-
-                    
                 </div>
 
-
-                 <div class="PP_project-section">
+                <!-- Boids Section -->
+                <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Boids</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
-                    
                     <div class="PP_project-description-content">
-                        <p>As the video shows, there are numerous planes following a master plane. This was implemented with a combination of <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* pathfinding</a> and <a href="https://en.wikipedia.org/wiki/Boids">boids</a>. Whilst another programmer worked on implementing pathfinding, i was assigned to work on the boids implementation.</p>
-                        <img src="../Assets/Photos/boidsimplementation.png">
-                        <p>The boid is just another inherited Agent, just with the added complexity of AI. the PathfinderAgent is what the other programmer was working on, all i had to do was create an implementation for numerous objects to follow it.</p>
-                        <p>Unfortunatly we ran out of developemnt time, however we where planning on expanding this system to use a "Formation" system, featured in most RTS games, where each boid would have a pathfinding of sort, and if i was to expand the project myself i would work on implementing such a feature smoothly.</p>
+                        <p>As shown in the video, multiple planes follow a lead plane using a combination of <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* pathfinding</a> and <a href="https://en.wikipedia.org/wiki/Boids">boids</a> behavior. While another programmer worked on pathfinding, I implemented the boids behavior.</p>
+                        <img src="../Assets/Photos/boidsimplementation.png" alt="Boids implementation code" />
+                        <p>The boids were implemented as specialized agents with AI logic. They followed a PathfinderAgent using simple separation, alignment, and cohesion rules.</p>
+                        <p>Unfortunately, we ran out of development time before adding formation logic. If I continue working on the project, I'd expand the system to support formations—common in RTS games—where boids organize into predefined layouts during movement.</p>
                     </div>
-
-                    
                 </div>
-
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 </body>
 </html>

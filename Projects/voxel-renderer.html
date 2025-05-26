@@ -25,7 +25,7 @@
                 Your browser doesnt support the video tag
             </video>
             <div class="PP_project-description">
-                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. My first version lacked structure, performance and proper architectural design. For this second attempt i thoroughly researched the topic of voxels before hand and proplerly planned how i wished to architect the project.</p>
+                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. My first version lacked structure, performance, and proper architectural design. For this second attempt I thoroughly researched the topic of voxels before hand and proplerly planned how I wished to architect the project.</p>
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Solution</u></h3>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>In my first system, each block was its own mesh. Whilst hidden faces where still culled, the renderer still issued thousands of draw calls a frame - an inefficient approach as modern GPU's are optimized for fewer, larger draw calls.</p>
-                        <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendererd together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the conifguration.</p>
+                        <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendered together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the configuration.</p>
                         <img src="../Assets/Photos/Voxel-Renderer-Diagram.png">
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="PP_project-description-content">
                         <img src="../Assets/Photos/blockAtlas.png">    
-                        <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendererd without needing to take breaks for different voxel types.</p>
+                        <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendered without needing to take breaks for different voxel types.</p>
                         <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
                         <img src="../Assets/Photos/TextureAtlasUsage.png">
                     </div>
@@ -69,7 +69,7 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>If i was to work on this project further, the first change i would work on would be the addition of trees. My first attempt did have trees, however they where done in a way where they wherent consistent, using the inbuilt rand function to determine where to place them. They also where very simply implemented always having the same shape. Preferably i would want a more procedual approach.</p>
+                        <p>If i was to work on this project further, the first change i would work on would be the addition of trees. My first attempt did have trees; however they where done in a way where they wherent consistent, using the inbuilt rand function to determine where to place them. They also where very simply implemented always having the same shape. Preferably i would want a more procedual approach.</p>
                     </div>
                 </div>
             </div>

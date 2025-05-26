@@ -126,7 +126,7 @@ body{
 .project{
     min-width:300px;
     max-width:400px;
-    height:600px;
+    height:620px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
     border:2px solid white;
     border-radius: var(--bold-border-radius);
@@ -341,11 +341,16 @@ body{
 
 .contacts-section ul{
     list-style: none;
+    text-align: center;
 }
 .contacts-section ul li a{
     font-weight: 500;
+    color:white;
 }
-
+.contacts-section ul li a:hover{
+    font-weight: 500;
+    color:var(--hover-accent);
+}
 
 
 .PP_project-introduction-section{
