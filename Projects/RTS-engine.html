@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
+    <script src="../script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <a href="../index.html" class="PP_back-button">Home</a>
+    <a href="https://github.com/TheEmperorsArmoury/TheGreatWar" class="PP_github-button">Github</a>
+    <div class="content">
+        <div class="PP_project-introduction-section">
+            <h1>RTS Engine</h1>
+            <div class="seperation-line"></div>
+            <p><i>Creating a lightweight RTS Engine</i></p>
+        </div>
+
+
+        <div class="PP_project-overview">
+            <video loop autoplay muted>
+                <source src="../Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4">
+                Your browser doesnt support the video tag
+            </video>
+            <div class="PP_project-description">
+                <p>This was my first group project, working with a team of volunteer developers to build an RTS game engine using the SFML library and C++. I was primarly responsible for the agents and rendering systems. Throughout development alot of members of the team came and went, however i worked with the team lead throughout.</p>
+                
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>GitHub</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <img src="../Assets/Photos/blockAtlas.png">    
+                        <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendererd without needing to take breaks for different voxel types.</p>
+                        <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
+                        <img src="../Assets/Photos/TextureAtlasUsage.png">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
