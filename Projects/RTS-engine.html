@@ -33,11 +33,63 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/blockAtlas.png">    
-                        <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendererd without needing to take breaks for different voxel types.</p>
-                        <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
-                        <img src="../Assets/Photos/TextureAtlasUsage.png">
+                        <img src="../Assets/Photos/Branch.png">    
+                        <p>Being my first group project, this is when i first learnt how to use gits primary colloboration features. Our team used <a href="https://github.com/">github</a> to host our repository, and each person work was done in a seperate branch.</p>
+                        <p>I spent the first few weeks of the project primarly focusing on how to utlize and navigate git, learning alot of the command and setting up the different requirements.</p>
                     </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Agents</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <img src="../Assets/Photos/baronTemp (2).png">
+                        <p>My first large task was building the agents system. The two main parts of this task was the agents themselves and the Agent Manager. The agents changed alot throughout development, but the core concept using inheritance to place agents any where on the world stayed the same.</p>
+                        <p>Every entity in the world is an agent; the trees, the planes, and there where intenetions to extend the engine to have interactable agents such as structures. Some of these could move and others couldnt, and there was alot of unique functionality for each.</p>
+                        <p>For this reason i decided to use a hiearchy of <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">inheritance</a> for each different agent.</p>
+                        <img src="../Assets/Photos/RTS-Agents-Diagram.png">
+                        <p>These are then inserted into the data structure another programmer developed, a <a href="https://en.wikipedia.org/wiki/Quadtree">quad tree</a>, where they can be referenced to render or update.</p>
+                        <img src="../Assets/Photos/PlaceAgentCode.png">
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Isometric Terrain</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    
+                    <div class="PP_project-description-content">
+                        <img src="../Assets/Photos/grass_spritesheet.png">
+                        <p>I was also responsible for building the isometric terrain system. The project already had utility functions to convert an isometric world space to screen space and vise versa, but we needed a system to fill the quadtree with references to terrain texture coordinates.</p>
+                        <p>This came with alot of steps. After alot of iteration we decided to use JSON to store the map data, using a terrain height array and a terrain type array. To build this JSON file i used a small python tool to procedually generate the heights and terrain types, which could have been used more to create numerous map types.</p>
+                    
+                        <p>Loading the height maps: </p>
+                        <img src="../Assets/Photos/heightmaploading.png">
+                        <p>Loading the terrain types wasnt as simple however. I decided to use a hashmap which lets me access different terrain spritesheets using a key which is what is stored in the JSON file.</p>
+                        <img src="../Assets/Photos/TerrainType.png">
+                        <p>The last part was figuring out which direction of the spritesheet to use, having to work out what the heights out surrounding terrains tiles where and choosing the corresponding direction enum accordingly. Most of this is just if statements so most code is removed for the sake of keeping the page clean.</p>
+                        <img src="../Assets/Photos/directionmapcode.png">
+                        <p>If i was to rework this section or make another RTS engine, i would likely choose to use an orthographic 3D system, having a generated height map of nodes and then connecting them together to make a mesh and blend textures to get smoother terrains.</p>
+                    </div>
+
+                    
+                </div>
+
+
+                 <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Boids</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    
+                    <div class="PP_project-description-content">
+                        <p>As the video shows, there are numerous planes following a master plane. This was implemented with a combination of pathfinding and </p>
+                    </div>
+
+                    
                 </div>
 
             </div>
