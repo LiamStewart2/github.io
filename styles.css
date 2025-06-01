@@ -475,3 +475,11 @@ body{
 .PP_project-description-content a:hover{
     color:var(--hover-accent);
 }
+
+.PP_project-description a{
+    color:white;
+}
+
+.PP_project-description a:hover{
+    color:var(--hover-accent);
+}
