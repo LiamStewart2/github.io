@@ -26,52 +26,31 @@
             </video>
             <div class="PP_project-description">
                 <p>This was my submition for my introduction to C# programming module for Staffordshire University, and features a recreation of the popular boss <a href="https://calamitymod.wiki.gg/wiki/Cryogen">Cryogen</a> from <a href="https://calamitymod.wiki.gg/">Calamity</a>. Obvious changes had to be made to support the top down view of the game, however all attacks and design desitions where inspired by the original boss.</p>
+                
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Solution</u></h3>
+                        <h3><u>Boss Overview</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>In my first system, each block was its own mesh. Whilst hidden faces where still culled, the renderer still issued thousands of draw calls a frame - an inefficient approach as modern GPU's are optimized for fewer, larger draw calls.</p>
-                        <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendered together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the configuration.</p>
-                        <img src="../Assets/Photos/Voxel-Renderer-Diagram.png">
+                        <p>The cryogen boss has 3 phases, and each where increasingly difficult. It used a simple statemachine, checking whether to switch state each time it was hit, switching to the second phase at 70% health and the third phase at 35% health.</p>
+                        <p>The attacks also varied in different phases. In the first phase the only attack is the directional icicles, however in phase 2 he unlocks a dash attack which does damage and shoots more icicles. In phase 3 these attacks just get more intense.</p>
+                        <img src="../Assets/Photos/Cryogen.png">
                     </div>
                 </div>
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Texture Atlas</u></h3>
+                        <h3><u>State Machine</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/blockAtlas.png">    
-                        <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendered without needing to take breaks for different voxel types.</p>
-                        <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
-                        <img src="../Assets/Photos/TextureAtlasUsage.png">
+                        <p>The Cryogen AI implementation uses a state-machine to manage the different states of the cryogens phases. An enum is used to track the different phases which is then checked when running the Update function in a switch statement.</p>
+                        <img src="../Assets/Photos/StateMachineOnDamage.png" width="500" height="auto">
                     </div>
                 </div>
 
-                <div class="PP_project-section">
-                    <div class="PP_project-section-title">
-                        <h3><u>Terrain Generation</u></h3>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="PP_project-description-content">
-                        <p>The generated terrain uses a <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise</a> implementation to span very large distances without the need of manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other</p>
-                        <img src="../Assets/Photos/Generate Chunk.png">
-                        <p>This is a very simple usage of perlin noise, and has the issue where a border is formed every 128 chunks, however the generation still expands infinitely, essentially looping the generated terrain there onwards.</p>
-                    </div>
-                </div>
-
-                <div class="PP_project-section">
-                    <div class="PP_project-section-title">
-                        <h3><u>Expansion</u></h3>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="PP_project-description-content">
-                        <p>If i was to work on this project further, the first change i would work on would be the addition of trees. My first attempt did have trees; however they where done in a way where they wherent consistent, using the inbuilt rand function to determine where to place them. They also where very simply implemented always having the same shape. Preferably i would want a more procedual approach.</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
