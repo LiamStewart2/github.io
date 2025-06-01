@@ -157,6 +157,7 @@ body{
 .video-section video{
     height:auto;
     display:block;
+    translate:-25% 0;
 }
 
 .project-details{
