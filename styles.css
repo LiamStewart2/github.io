@@ -344,6 +344,11 @@ body{
     list-style: none;
     text-align: center;
 }
+
+.contacts-section ul li a i{
+    padding:5px;
+}
+
 .contacts-section ul li a{
     font-weight: 500;
     color:white;
