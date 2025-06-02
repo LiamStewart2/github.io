@@ -10,7 +10,7 @@
 </head>
 <body>
     <a href="../index.html" class="PP_back-button">Home</a>
-    <a href="https://github.com/LiamStewart2/Minecraft-Recreation" class="PP_github-button">Github</a>
+    <a href="https://github.com/LiamStewart2/BossRushUniversityProject" class="PP_github-button">Github</a>
     <div class="content">
         <div class="PP_project-introduction-section">
             <h1>Cryogen Boss Fight</h1>
@@ -50,6 +50,32 @@
                     </div>
                 </div>
 
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Visual Effects</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>Even though the focus of the assignment was the programmng side, i wanted to add some visual effects to the game. The first effects i worked on adding where simple particle effects for numerous assets, such as the Cryogens hit effect.</p>
+                        <p>However i wanted to also use the shader graph system provided by Unity, so implemented a flash effect on enemies when they get hit.</p>
+                        <img src="../Assets/Photos/UnityShaderGraph.png">
+                        <p>I also wanted a more subtle effect to enhance the "Dungeon" vibe, so added a Vignette effect.</p>
+                        <img src="../Assets/Photos/Volume.png">
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Gun Inventory</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>Whilst not demonstrated in the video above, there is a gun inventory system implemented, allowing players to pickup, swap and unequip guns. In the demo, the player can pick open a chest, which drops a weapon the player can then walk over to pickup. the system is built in a way where if multiple chests where to be in the game, they could pick and swap their weapons by walking over them.</p>
+                        <img src="../Assets/Photos/ChestPickup.png">
+                        <p>The guns all work of a "Gun Script" component, which supports any projectile based gun, letting the developer set the weapons projectile object, shooting speeds, bullet spread and more. The component has an Update function, which is called by the character controller to run all logic for the weapons.</p>
+                        <img src="../Assets/Photos/GunScript.png">
+                    </div>
+                </div>
                 
             </div>
         </div>
