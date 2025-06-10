@@ -66,6 +66,12 @@ body{
     font-weight:lighter
 }
 
+.intro-section p{
+    text-align: center;
+    font-size: large;
+    font-weight:400;
+}
+
 .seperation-line{
     margin:0px auto;
     width:60%;
