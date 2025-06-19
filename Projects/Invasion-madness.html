@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
+    <script src="../script.js"></script>
+    <title>Invasion Madness</title>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="PP_back-button">Home</a>
+        <a href="https://github.com/StaffsUniGames/gdev40003-24-bpd-artefact-LiamStewart2" class="PP_github-button">GitHub</a>
+    </nav>
+
+    <main class="content">
+        <section class="PP_project-introduction-section">
+            <h1>Invasion Madness</h1>
+            <div class="seperation-line"></div>
+            <p><i>Adding Powerups to Space Invaders</i></p>
+        </section>
+
+        <section class="PP_project-overview">
+            <video loop autoplay muted>
+                <source src="../Assets/Videos/2025-06-19 04-59-47.mp4" type="video/mp4" />
+                Your browser doesn't support the video tag.
+            </video>
+
+            <div class="PP_project-description">
+                <p>This was my submition to the bespoke platform development module for year 1 of university, where we where tasked with building a cross platform game using C++ and SDL2 which would then be build onto a bespoke platform. For my game I decided to build a Space Invaders like game, with the addition of power ups. This project achieved a first class for the module.</p>
+
+                <!-- GitHub Section -->
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Cross Platform Development</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <img src="../Assets/Photos/evercade.png" alt="Evercade EXP console" style="max-width:500px;">
+                        <p>The game was built onto an Evercade EXP, a handheld console designed for small retro games, with very specifications. This meant that throughout development I was having to take the capabilities of the device into account.</p>    
+                        <p>To build my game onto the evercade, i would go through the process of pushing all code onto a linux virtual machine then onto a buildserver. I would then push the compiled files onto the evercades cartridge and SSH into the device to run the game.</p>
+                        <p>This was an amazing opportunity to get hands on experience building a cross platform game. I had previously used Unities build system to build a mobile, however that abstracts most of the work from the developer, and it was nice seeing how it works behind the scene.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+</body>
+</html>
