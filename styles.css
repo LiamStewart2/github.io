@@ -129,6 +129,19 @@ body{
     margin:50px 0px 30px 0px;
 }
 
+.project-section p{
+    text-align: center;
+    justify-content: center;
+    font-size: medium;
+}
+
+.project-section p a{
+    color:white;
+}
+.project-section p a:hover{
+    color:var(--hover-accent);
+}
+
 .project{
     min-width:300px;
     max-width:400px;
