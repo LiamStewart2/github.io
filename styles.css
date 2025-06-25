@@ -116,11 +116,12 @@ body{
     border-radius: var(--bold-border-radius);
 }
 
-.projects{
-    width:100%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+    justify-items: center;
 }
 
 .project-section h3{
