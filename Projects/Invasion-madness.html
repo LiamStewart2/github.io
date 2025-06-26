@@ -28,7 +28,7 @@
             </video>
 
             <div class="PP_project-description">
-                <p>This was my submition to the bespoke platform development module for year 1 of university, where we where tasked with building a cross platform game using C++ and SDL2 which would then be build onto a bespoke platform. For my game I decided to build a Space Invaders like game, with the addition of power ups. This project achieved a first class for the module.</p>
+                <p>This was my submition to the bespoke platform development module for year 1 of university, where we where tasked with building a cross platform game using C++ and SDL2 which would then be built onto a bespoke platform. For my game I decided to make a twist on the retro arcade game Space Invaders however with the addition of power ups. This project achieved a first class for the module.</p>
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
@@ -37,9 +37,9 @@
                     </div>
                     <div class="PP_project-description-content">
                         <img src="../Assets/Photos/evercade.png" alt="Evercade EXP console" style="max-width:500px;">
-                        <p>The game was built onto an Evercade EXP, a handheld console designed for small retro games, with very specifications. This meant that throughout development I was having to take the capabilities of the device into account.</p>    
-                        <p>To build my game onto the evercade, i would go through the process of pushing all code onto a linux virtual machine then onto a buildserver. I would then push the compiled files onto the evercades cartridge and SSH into the device to run the game.</p>
-                        <p>This was an amazing opportunity to get hands on experience building a cross platform game. I had previously used Unities build system to build a mobile, however that abstracts most of the work from the developer, and it was interesting seeing how it works behind the scene.</p>
+                        <p>The game was built onto an Evercade EXP, a handheld console designed for small retro games, with very restricting specifications. This meant that throughout development I was having to take the capabilities of the device into account.</p>    
+                        <p>To build my game onto the evercade, I would go through the process of pushing all code onto a linux virtual machine then onto a buildserver. I would then push the compiled files onto the evercades cartridge and SSH into the device to run the game.</p>
+                        <p>This was an amazing opportunity to get hands on experience building a cross platform game. I had previously used Unities build system to build a mobile game, however unities system abstracts most of the work from the developer, and it was interesting seeing how it works behind the scene.</p>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                     <div class="PP_project-description-content">
                         <p>For this project, i built my first scene manager, capable of creating multiple "Scenes". A scene would be a child class of the parent scene class, having basic functions such as an Update, Render and HandleInput. These would be called by the owning SceneManager class to keep the game loop running.</p>
                         <img src="../Assets/Photos/Parent Scene Class.png" style="max-width:600px;">
-                        <p>The scene manager class would use a singleton, allowing the instance to be accessible globally through the use of static functions. The scene manager contains a LoadScene function, allowing the developer to load any class derived from the Scene class. This is stored in the scene member pointer in the manager.</p>
+                        <p>The scene manager class would use a <a href="https://en.wikipedia.org/wiki/Singleton">singleton</a>, allowing the instance to be accessible globally through the use of static functions. The scene manager contains a LoadScene function, allowing the developer to load any class derived from the Scene class. The scene instance is stored on the heap in the scene manager and isnt moved to prevent issues with memory management.</p>
                         <p>The scene manager then contains some "middle man" functions to run the scene from the application without having to interact with the scene instance itself.</p>
                         <img src="../Assets/Photos/Scene Manager.png" style="max-width:600px;">
                         <p>This allows the developer to load scene very intuitively and simply.</p>
@@ -67,8 +67,8 @@
                     <div class="PP_project-description-content">
                         <p>In this project, i implemented a reusable <a href="https://en.wikipedia.org/wiki/Object_pool_pattern">object pool</a> system using templates so that any object could be pooled. This sub-system was used for numerous features, such as the enemies, bullets and the particle effects.</p>
                         <img src="../Assets/Photos/Object Pool.png">
-                        <p>The implementation uses a linked list of object instances. Objects store "data" of type T, using templates letting us change what we are storing in each object pool. I then have numerous functions to manage this linked list, such as getting the next available object, disabling a certain object, or initializing the pool itself.</p>
-                        <p>An optimisation of mine on top of the regular object pool was tracking where the first free to use object would be stored. This takes the expensive linear search algorithm which had a worse, and very common, case of o(n) time complexity. The optimised version is closer to an o(1) implementation.</p>
+                        <p>The implementation uses a <a href="https://en.wikipedia.org/wiki/Linked_list">linked list</a> of object instances. Objects store "data" of type T, using templates letting us change what we are storing in each object pool. I then have numerous functions to manage this linked list, such as getting the next available object, disabling a certain object, or initializing the pool itself.</p>
+                        <p>An optimisation of mine on top of the regular object pool was tracking where the first free to use object would be stored. This takes the expensive linear search algorithm which had a worse, and very common, case of o(n) time complexity. The optimised version is closer to an o(1) time complexity.</p>
                     </div>
                 </div>
 
