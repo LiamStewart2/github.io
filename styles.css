@@ -42,12 +42,22 @@ body{
     transition:0.2s;
 }
 
+.top-bar-cv a{
+    transition: 0.2;
+    color:white;
+}
+.top-bar-cv:hover a{
+    color:var(--hover-accent);
+}
+
 .top-bar-cv:hover{
     margin-right:10px;
     color:var(--hover-accent);
     border:2px solid var(--hover-accent);
     box-shadow: 3px 3px 2px 1px var(--hover-accent);
 }
+
+
 
 .top-bar-links a{
     transition:0.2s;
