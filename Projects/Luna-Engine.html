@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
+    <script src="../script.js"></script>
+    <title>Luna Engine</title>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="PP_back-button">Home</a>
+        <a href="https://github.com/TheEmperorsArmoury/TheGreatWar" class="PP_github-button">GitHub</a>
+    </nav>
+
+    <main class="content">
+        <section class="PP_project-introduction-section">
+            <h1>Luna Engine</h1>
+            <div class="seperation-line"></div>
+            <p><i>Building a 3D Game Engine</i></p>
+        </section>
+
+        <section class="PP_project-overview">
+            <video loop autoplay muted>
+                <source src="../Assets/Videos/2025-07-02 05-18-22.mp4" type="video/mp4" />
+                Your browser doesn't support the video tag.
+            </video>
+
+            <div class="PP_project-description">
+                <p>This is my first attempt at building a 3D game engine using OpenGL. It is currently a work in progress, but i already have a couple features implemented forming the basis of the engine. This project is something i have wanted to commit to for a long time, and finally feel in a good position to start work on it.</p>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Game Objects</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <img src="../Assets/Photos/ObjectSystem.png" alt="Git branching diagram" />
+                        <p>Taking notes from <a href="https://gameprogrammingpatterns.com/">Robert Nystroms Game Programming Patterns</a>, i wanted an ECS like system, however for sake of setting up the project, settled for a much simpler object component system, where objects own a list of components</p>
+                        <p>Each update and render tick the objects are then looped through and all components they own update. This system allows quick development of new components, however i still intend on moving to a <a href="https://en.wikipedia.org/wiki/Entity_component_system#:~:text=Entity%E2%80%93component%E2%80%93system%20(ECS,Entity%E2%80%93Component%E2%80%93System%20layout.">traditional ECS</a> as one of my next tasks due to the significant performance improvment.</p>
+                    </div>
+                </div>
+        </section>
+    </main>
+</body>
+</html>
