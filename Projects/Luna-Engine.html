@@ -23,7 +23,7 @@
 
         <section class="PP_project-overview">
             <video loop autoplay muted>
-                <source src="../Assets/Videos/2025-07-02 05-18-22.mp4" type="video/mp4" />
+                <source src="../Assets/Videos/2025-07-06 02-43-17.mp4" type="video/mp4" />
                 Your browser doesn't support the video tag.
             </video>
 
@@ -32,15 +32,32 @@
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Game Objects</u></h3>
+                        <h3><u>Entity Component System (ECS)</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/ObjectSystem.png" alt="Git branching diagram" />
-                        <p>Taking notes from <a href="https://gameprogrammingpatterns.com/">Robert Nystroms Game Programming Patterns</a>, i wanted an ECS like system, however for sake of setting up the project, settled for a much simpler object component system, where objects own a list of components</p>
-                        <p>Each update and render tick the objects are then looped through and all components they own update. This system allows quick development of new components, however i still intend on moving to a <a href="https://en.wikipedia.org/wiki/Entity_component_system#:~:text=Entity%E2%80%93component%E2%80%93system%20(ECS,Entity%E2%80%93Component%E2%80%93System%20layout.">traditional ECS</a> as one of my next tasks due to the significant performance improvment.</p>
+                        <img src="../Assets/Photos/ECS_Simple_Layout.svg.png" alt="Git branching diagram" />
+                        <p>This game engine will function on an <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a>, where game objects are just ID's that connect numerous components, using a database approach. This approach is far superior in terms of cache friendliness as the CPU can load the array of components as contiguous chunks of memory instead of individually grabbing each piece of data.</p>    
+                        <p>These components are then used by whatever system needs them. For example, the Renderering System would need access to the Mesh Component and the Transform Component.</p>
+                        <img src="../Assets/Photos/Rendering System.png">
                     </div>
                 </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Cascading Shadow Mapping</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>My first goal with this game engine is to implement the graphical effects common in 99% of games now-days, and the first effect that came to mind was shadows. To achieve this effect i utilised <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow mapping</a>, a technique where the scene is rendererd from the perspective of the light.</p>
+                        <p>However, unlike when rendering the scene to the camera, we are only interested in the pixels distance from the camera, which is conviniently stored for us in the Z depth buffer. This buffer is then sampled to calculate whether the pixel currently being renderering in the shader is hidden from the light source or not.</p>
+                        <img width = 300px src="../Assets/Photos/withShadowMapping.png"><img width = 300px src="../Assets/Photos/WithoutShadowMapping.png">
+                        <p>Pure shadow mapping with no additional effects ontop however have a very costly increase in quality to performance ratio. If you want more defined shadows when zooming in close without having an insanely high resolution shadow buffer texture then a more complex method is required - <a href="https://learnopengl.com/Guest-Articles/2021/CSM">Cascading Shadow Mapping</a></p>
+                        <p>CSM allows the lighting matricies to change depending on the distance between the camera and the given pixel, focusing the shadow buffer texture to the limits of the view frustum. This allows us to create higher quality shadows without increasing the resolution of the shadow textures. This effect is displayed by the different color filters on the video.</p>
+                        <img src="../Assets/Photos/frustum_fitting.png">
+                    </div>
+                </div>
+                
         </section>
     </main>
 </body>
