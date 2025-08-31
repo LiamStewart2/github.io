@@ -23,9 +23,10 @@
 
         <section class="PP_project-overview">
             <video loop autoplay muted>
-                <source src="../Assets/Videos/2025-07-06 02-43-17.mp4" type="video/mp4" />
+                <source src="../Assets/Videos/2025-08-31 05-51-05.mp4" type="video/mp4" />
                 Your browser doesn't support the video tag.
             </video>
+
 
             <div class="PP_project-description">
                 <p>This is my first attempt at building a 3D game engine using OpenGL. It is currently a work in progress, but i already have a couple features implemented forming the basis of the engine. This project is something i have wanted to commit to for a long time, and finally feel in a good position to start work on it.</p>
@@ -65,8 +66,35 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>One of the latest features I added to my engine is a scene graph system—a way to organize objects hierarchically, so that child objects inherit transformations from their parents. I designed the system to store object IDs in a scene graph, which links to a Transformation Manager. Each frame, this manager walks through the graph to calculate and update the final world transforms for all objects.</p>
-                        <img src="../Assets/Photos/SceneGraph ownership.png">
+                        <p>
+                            The engine uses a <a href="https://en.wikipedia.org/wiki/Scene_graph">Scene Graph</a> to define parent–child relationships between objects. 
+                            This allows transformations such as position, rotation, and scale to automatically propagate from a parent to its children, making it easy to build complex objects from smaller parts (e.g. a car body with wheel entities attached).
+                        </p>
+                        <p>
+                            The Scene Graph works alongside the ECS: entities still hold their own components, but their local transforms are resolved into world transforms through the hierarchy. 
+                            This ensures efficient rendering and physics updates while keeping the engine flexible and easy to extend.
+                        </p>
+                        <img src="../Assets/Photos/SceneGraph ownership.png" alt="Scene graph hierarchy diagram">
+                    </div>
+                </div>
+                
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>ImGui Integration</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>
+                            The engine includes <a href="https://github.com/ocornut/imgui">Dear ImGui</a> for creating in-engine tools and debug interfaces. 
+                            ImGui makes it easy to inspect data, display performance stats, and tweak values such as lighting or camera settings in real time 
+                            without restarting or recompiling the engine.
+                        </p>
+                        <p>
+                            I have also set up ImGui’s docking and viewport features, allowing windows to be rearranged and even popped out into separate windows, 
+                            similar to professional editors. This provides a flexible foundation for building a scene editor and other development tools directly 
+                            inside the engine.
+                        </p>
+                        <img src="../Assets/Photos/ImguiDocking.png" alt="ImGui docking demo screenshot">
                     </div>
                 </div>
 
