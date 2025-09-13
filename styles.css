@@ -26,6 +26,20 @@ body{
     border-radius: var(--bold-border-radius);
 }
 
+.intro-video{
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;
+}
+
+.intro-video video
+{
+    box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: var(--bold-border-radius);
+    max-width: 550px;
+    height:auto;
+}
 
 .top-bar{
     display:flex;
