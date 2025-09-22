@@ -80,6 +80,27 @@
                 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
+                        <h3><u>Scripting</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>The engine also features Lua Scripting, allowing users to write and maintain code to create complex gameplay features.
+                            I am currently using Sol2 bindings to allow the game engine to interact with script files, which greatly simplifies the process of compiling and running scripts.
+                            Whilst developing the scripting feature i tested numerous other languages such as python and C#, however found that Lua fit the lightweight style i was looking for.
+                        </p>
+                        <img src="../Assets/Photos/Lua_language.webp" style="max-width: 150px; border:0; box-shadow: 0 0 0;">
+                        <p>Scripts are treated as an asset, being stored in the asset manager and, similarly to mesh's, are referenced in a dedicated component; ScriptComponent. This allows
+                            me to access the corresponding scripts for each object. Only one instance of a script is active at time, and is just passed the object ID of which object should be
+                            affected by the changes being made in the script. Currently an object can only have 1 script at a time, but i hope to find a work around to this issue soon.
+                        </p>
+                        <p>Below is the code for loading different scripts. Alot of the code is error checking, due to the nature of scripting languages. In sol, calling a stored function is no different to calling a standard c++ function.
+                        </p>
+                        <img src="../Assets/Photos/lualoading.png">
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
                         <h3><u>ImGui Integration</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
