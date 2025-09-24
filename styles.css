@@ -1,7 +1,7 @@
 :root{
     --hover-accent: rgb(144, 255, 100);
-    --page-background: rgb(15, 15, 15);
-    --section-background: rgb(13, 13, 13);
+    --page-background: rgb(10, 10, 10);
+    --section-background: rgb(10, 10, 10);
     --bold-border-radius: 3px;
     scroll-behavior: smooth;
 }
