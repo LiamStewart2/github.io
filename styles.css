@@ -1,12 +1,15 @@
 :root{
     --hover-accent: rgb(144, 255, 100);
+    --page-background: rgb(4, 4, 4);
+    --section-background: rgb(5, 5, 5);
     --bold-border-radius: 3px;
     scroll-behavior: smooth;
 }
 
 body{
-    background-color: rgb(13, 0, 19);
-    background-image:linear-gradient(30deg, rgb(37, 0, 46), rgb(13, 0, 19), rgb(37, 0, 46));
+    background-color: var(--page-background);
+    background-image:url("Assets/Photos/noise2.jpg");
+    background-blend-mode:overlay;
     color:white;
 
     font-family: monaco, Consolas, "Lucida Console", monospace; 
@@ -16,7 +19,7 @@ body{
 }
 
 .content{
-    margin:100px 200px;
+    margin:100px 150px;
 }
 
 .intro-section{
@@ -133,7 +136,7 @@ body{
 }
 
 .project-section{
-    background-color: rgb(13, 0, 13);
+    background-color: var(--section-background);
     padding:0px;
     margin:100px 0px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
@@ -263,7 +266,7 @@ body{
 
 
 .tech-stack-section{
-    background-color: rgb(13, 0, 13);
+    background-color: var(--section-background);
     padding:0px;
     margin:100px 0px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
@@ -299,7 +302,7 @@ body{
 
 
 .about-me{
-    background-color: rgb(13, 0, 13);
+    background-color: var(--section-background);
     padding:20px;
     margin:100px 0px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
@@ -320,7 +323,7 @@ body{
 
 
 .my-games-list{
-    background-color: rgb(13, 0, 13);
+    background-color: var(--section-background);
     padding:20px;
     margin:100px 0px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
@@ -373,7 +376,7 @@ body{
 }
 
 .contacts-section{
-    background-color: rgb(13, 0, 13);
+    background-color: var(--section-background);
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
     border:2px solid white;
     border-radius: var(--bold-border-radius);
