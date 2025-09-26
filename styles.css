@@ -13,7 +13,7 @@ body{
     color:white;
 
     font-family: monaco, Consolas, "Lucida Console", monospace; 
-    font-size: 24px; 
+    font-size: clamp(16px, 2vw, 24px);
     font-style: normal; font-variant: normal; 
     font-weight: 700; line-height: 26.4px;
 }
@@ -172,7 +172,7 @@ body{
 }
 
 .project{
-    min-width:300px;
+    min-width:100px;
     max-width:400px;
     height:620px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
@@ -539,4 +539,105 @@ body{
 
 .PP_project-description a:hover{
     color:var(--hover-accent);
+}
+
+.PP_project-overview video,
+.PP_project-description-content img {
+  max-width: 90%;
+  height: auto;
+}
+@media (max-width: 769px){
+    .content{
+        margin:15px;
+    }
+    .intro-section{
+        margin:20px 0px;
+    }
+    .PP_project-overview{
+        padding:5px;
+    }
+}
+
+@media (max-width: 768px) {
+  .navigation ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .navigation ul li {
+    margin: 10px 0;
+    width: 80%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .tech-stack-list ul {
+    flex-wrap: wrap;
+  }
+
+  .my-games-list .games-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .my-games-list .games-list div {
+    margin: 10px 0;
+    width: 90%;
+  }
+}
+
+@media(max-width:768px)
+{
+    .projects {
+        grid-template-columns: 1fr;
+        justify-items: center;      
+    }
+    .project{
+        max-width: 90%;
+        margin:3px;
+        height:fit-content;
+    }
+}
+@media (max-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: static; /* remove absolute positioning */
+  }
+
+  .PP_back-button,
+  .PP_github-button {
+    position: static;
+    flex: 1;
+    margin: 0 5px;
+    text-align: center;
+  }
+}
+@media (max-width: 768px) {
+  .tech-stack-list ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .tech-stack-list li {
+    flex: 1 1 120px; /* each takes ~120px min, then wraps */
+    max-width: 150px;
+    text-align: center;
+  }
+}
+
+@media(max-width:768px)
+{
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
