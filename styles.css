@@ -625,7 +625,7 @@ body{
 
   .tech-stack-list li {
     flex: 1 1 120px; /* each takes ~120px min, then wraps */
-    max-width: 150px;
+    max-width: fit-content;
     text-align: center;
   }
 }
