@@ -162,41 +162,46 @@ body{
 
 .project-section p{
     text-align: center;
-    justify-content: center;
     font-size: medium;
 }
 
 .project-section p a{
     color:white;
+    text-decoration: none;
 }
 .project-section p a:hover{
     color:var(--hover-accent);
 }
 
 .project{
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
     min-width:100px;
     max-width:400px;
-    height:620px;
+    height:500px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
     border:2px solid white;
     border-radius: var(--bold-border-radius);
     margin:20px;
     transition: 0.2s;
     cursor:pointer;
+    overflow: hidden;
 }
-
-.project .link a{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
 .project:hover{
     box-shadow: 5px 5px 2px 1px var(--hover-accent);
     border:2px solid  var(--hover-accent);
 }
+
+.project:link,
+.project:visited,
+.project:hover,
+.project:active {
+    color: inherit;
+    text-decoration: none;
+}
+
 
 .video-section{
     position:relative;
@@ -207,7 +212,8 @@ body{
 .video-section video{
     height:auto;
     display:block;
-    translate:-25% 0;
+    width:100%;
+    object-fit: cover;
 }
 
 .project-details{
@@ -251,6 +257,7 @@ body{
     margin-right:15px;
     margin-left:auto;
     color:white;
+    cursor: pointer;
 }
 .github:hover{
     color:var(--hover-accent);
