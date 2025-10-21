@@ -21,7 +21,7 @@
         </section>
 
         <section class="PP_project-overview">
-            <video loop autoplay muted>
+            <video loop autoplay muted controls>
                 <source src="../Assets/Videos/2025-06-19 04-59-47.mp4" type="video/mp4" />
                 Your browser doesn't support the video tag.
             </video>
@@ -68,6 +68,17 @@
                         <img src="../Assets/Photos/Object Pool.png">
                         <p>The implementation uses a <a href="https://en.wikipedia.org/wiki/Linked_list">linked list</a> of object instances. Objects store "data" of type T, using templates letting us change what we are storing in each object pool. I then have numerous functions to manage this linked list, such as getting the next available object, disabling a certain object, or initializing the pool itself.</p>
                         <p>An optimisation of mine on top of the regular object pool was tracking where the first free to use object would be stored. This takes the expensive linear search algorithm which had a worse, and very common, case of o(n) time complexity. The optimised version is closer to an o(1) time complexity.</p>
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3><u>Retrospective</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>This project was my first time using docker tools and operating build servers to build my games to other platforms, and was a fun task to work on, seeing my game on handheld devices.</p>
+                        <p>One issue i encountered during the development of this project was not checking the compatability of libraries i used. Initially, i used JSON files to store data about my particle systems, however realised on the last week of development that <a href="https://github.com/nlohmann/json">Nlohmann's JSON library</a> wasn't compatible on the linux platform so had to rebuild the system using much simpler, C++ standard file reading.</p>
                     </div>
                 </div>
 
