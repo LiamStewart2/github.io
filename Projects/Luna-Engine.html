@@ -46,6 +46,20 @@
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
+                        <h3><u>API-Agnostic Render Architecture</u></h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>During my Realtime Rendering module, I was allowed to rework my render pipeline to support DirectX 11. Instead of a simple port, I chose to design an API-agnostic architecture; making it easier to integrate additional backends like OpenGL in the future without major rewrites.</p>
+                        <img src="../Assets/Photos/RendererAPI.png">
+                        <p>My approach was to define interfaces for core graphical objects such as Meshes and Textures, alongside a higher-level Render API interface responsible for combining and managing API-specific operations like constant buffer and uniform handling as shown above.</p>
+                        <p>Currently, the engine only supports DirectX 11, but I plan to expand it in the future to include other graphics APIs such as OpenGL, and to experiment with more modern options like Vulkan and DirectX 12.</p>
+                    </div>
+                </div>
+
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
                         <h3><u>Cascading Shadow Mapping</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
