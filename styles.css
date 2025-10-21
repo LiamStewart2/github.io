@@ -249,6 +249,16 @@ body{
     padding:0px 10px;
 }
 
+.multiplatform{
+    align-items: center;
+    display:flex;
+    margin:0px 10px;
+    margin-left: auto;
+}
+.multiplatform i{
+    padding:0px 10px;
+}
+
 .github{
     font-size:30px;
     padding:0px;
@@ -436,7 +446,7 @@ body{
 }
 
 .PP_back-button{
-    position:absolute;
+    position:fixed;
     top: 10px;
     left: 10px;
     padding:2px 5px;
@@ -456,7 +466,7 @@ body{
 }
 
 .PP_github-button{
-    position:absolute;
+    position:fixed;
     top: 10px;
     right: 10px;
     padding:2px 5px;
