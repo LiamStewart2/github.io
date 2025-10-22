@@ -27,7 +27,7 @@
                 Your browser doesnt support the video tag
             </video>
             <div class="PP_project-description">
-                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. My first version lacked structure, performance, and proper architectural design. For this second attempt I thoroughly researched the topic of voxels before hand and proplerly planned how I wished to architect the project.</p>
+                <p>This was my second attempt at a voxel renderer using C++ and OpenGL. My first version lacked structure, performance, and proper architectural design. For this second attempt, I thoroughly researched the topic of voxels beforehand and properly planned how I wished to architect the project.</p>
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
                         <h3><u>Solution</u></h3>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>In my first system, each block was its own mesh. Whilst hidden faces where still culled, the renderer still issued thousands of draw calls a frame - an inefficient approach as modern GPU's are optimized for fewer, larger draw calls.</p>
-                        <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendered together, reducing the thousands of render calls to more like 32 or 64 depending on the render distance set in the configuration.</p>
+                        <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendered together, reducing the thousands of render calls to more like 32 or 64, depending on the render distance set in the configuration.</p>
                         <img src="../Assets/Photos/Voxel-Renderer-Diagram.png">
                     </div>
                 </div>
@@ -59,19 +59,20 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>The generated terrain uses a <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise</a> implementation to span very large distances without the need of manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other</p>
+                        <p>The generated terrain uses a <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise</a> implementation to span very large distances without the need for manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other.</p>
                         <img src="../Assets/Photos/Generate Chunk.png">
-                        <p>This is a very simple usage of perlin noise, and has the issue where a border is formed every 128 chunks, however the generation still expands infinitely, essentially looping the generated terrain there onwards.</p>
+                        <p>This is a very simple usage of perlin noise, and has the issue where a border is formed every 128 chunks, however, the generation still expands infinitely, essentially looping the generated terrain there onwards.</p>
                     </div>
                 </div>
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Expansion</u></h3>
+                        <h3><u>Retrospective</u></h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>If i was to work on this project further, the first change i would work on would be the addition of trees. My first attempt did have trees; however they where done in a way where they wherent consistent, using the inbuilt rand function to determine where to place them. They also where very simply implemented always having the same shape. Preferably i would want a more procedual approach.</p>
+                        <p>If I were to work on this project further, the first change I would work on would be the addition of trees. My first attempt did have trees; however, they were done in a way where they weren't consistent, using the built-in rand function to determine where to place them. They were also very simply implemented, always having the same shape. Preferably, I would want a more procedural approach.</p>
+                        <p>Overall, this project served as a strong improvement over my previous work, allowing me to refine my OpenGL skills and gain a better understanding of procedural generation techniques.</p>
                     </div>
                 </div>
             </div>

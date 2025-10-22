@@ -29,7 +29,7 @@
 
 
             <div class="PP_project-description">
-                <p>This is my 3D game engine built using C++. It is still frequently built on, but already it features core aspects of engine architecture commonly utilised in many modern game engines. This is a long term passion project of mine which serves as a sandbox for learning new libraries and algorithms.</p>
+                <p>This is my 3D game engine built using C++. It is still frequently built upon, but already features core aspects of engine architecture commonly utilized in many modern game engines. This is a long-term passion project of mine, which serves as a sandbox for learning new libraries and algorithms.</p>
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
@@ -38,8 +38,8 @@
                     </div>
                     <div class="PP_project-description-content">
                         <img src="../Assets/Photos/ECS_Simple_Layout.svg.png" alt="Git branching diagram" />
-                        <p>This game engine functions on an <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a>, where game objects are built up of numerous components, using the game objects ID to reference grouped components. This approach is far superior in terms of cache friendliness as the CPU can load the array of components as contiguous chunks of memory instead of individually grabbing each piece of data.</p>    
-                        <p>These components are then used by whatever system needs them. For example, the Renderering System would need access to a list of the mesh components and the transform components.</p>
+                        <p>This game engine functions on an <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a>, where game objects are composed of numerous components, using the game object's ID to reference grouped components. This approach is far superior in terms of cache friendliness, as the CPU can load the array of components as contiguous chunks of memory instead of individually grabbing each piece of data.</p>    
+                        <p>These components are then used by whatever system needs them. For example, the Rendering System would need access to a list of the mesh components and the transform components.</p>
                         <img src="../Assets/Photos/Rendering System.png">
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         <p>During my Realtime Rendering module, I was allowed to rework my render pipeline to support DirectX 11. Instead of a simple port, I chose to design an API-agnostic architecture; making it easier to integrate additional backends like OpenGL in the future without major rewrites.</p>
                         <img src="../Assets/Photos/RendererAPI.png">
                         <p>My approach was to define interfaces for core graphical objects such as Meshes and Textures, alongside a higher-level Render API interface responsible for combining and managing API-specific operations like constant buffer and uniform handling as shown above.</p>
-                        <p>Currently, the engine only supports DirectX 11, but I plan to expand it in the future to include other graphics APIs such as OpenGL, and to experiment with more modern options like Vulkan and DirectX 12.</p>
+                        <p> Currently, the engine only supports DirectX 11, but I plan to expand it in the future to include other graphics APIs such as OpenGL and to experiment with more modern options like Vulkan and DirectX 12.</p>
                     </div>
                 </div>
 
@@ -64,11 +64,11 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>The first effect i built ontop of this game engine where shadows. To achieve this effect i utilised <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow mapping</a>, a technique where the scene is rendererd from the perspective of the light.</p>
-                        <p>However, unlike when rendering the scene to the camera, we are only interested in the pixels distance from the camera, which is conviniently stored for us in the Z depth buffer. This buffer is then sampled to calculate whether the pixel currently being renderering in the shader is hidden from the light source or not.</p>
+                        <p>The first effect I built on top of this game engine where shadows. To achieve this effect, I utilised <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow mapping</a>, a technique where the scene is rendered from the perspective of the light.</p>
+                        <p>However, unlike when rendering the scene to the camera, we are only interested in the pixel's distance from the camera, which is conveniently stored for us in the Z depth buffer. This buffer is then sampled to calculate whether the pixel currently being rendered in the shader is hidden from the light source or not.</p>
                         <img width = 300px src="../Assets/Photos/withShadowMapping.png"><img width = 300px src="../Assets/Photos/WithoutShadowMapping.png">
-                        <p>Pure shadow mapping with no optimisations, however, can have a very costly hit to performance. If you want more defined shadows when zooming in close without having an insanely high resolution shadow buffer texture then a more complex method is required - <a href="https://learnopengl.com/Guest-Articles/2021/CSM">Cascading Shadow Mapping</a></p>
-                        <p>CSM allows the lighting matricies to change depending on the distance between the camera and the given pixel, focusing the shadow buffer texture to the limits of the view frustum. This allows us to create higher quality shadows without increasing the resolution of the shadow textures.</p>
+                        <p>Pure shadow mapping with no optimisations, however, can have a very costly hit to performance. If you want more defined shadows when zooming in close without having an insanely high resolution shadow buffer texture, then a more complex method is required - <a href="https://learnopengl.com/Guest-Articles/2021/CSM">Cascading Shadow Mapping</a></p>
+                        <p>CSM allows the lighting matrices to change depending on the distance between the camera and the given pixel, focusing the shadow buffer texture to the limits of the view frustum. This allows us to create higher quality shadows without increasing the resolution of the shadow textures.</p>
                         <img src="../Assets/Photos/frustum_fitting.png">
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                     <div class="PP_project-description-content">
                         <p>
                             The engine uses a <a href="https://en.wikipedia.org/wiki/Scene_graph">Scene Graph</a> to define parent–child relationships between objects. 
-                            This allows transformations such as position, rotation, and scale to automatically propagate from a parent to its children, making it easy to build complex objects from smaller parts (e.g. a car body with wheel entities attached).
+                            This allows transformations such as position, rotation, and scale to automatically propagate from a parent to its children, making it easy to build complex objects from smaller parts (e.g., a car body with wheel entities attached).
                         </p>
                         <p>
                             The Scene Graph works alongside the ECS: entities still hold their own components, but their local transforms are resolved into world transforms through the hierarchy. 
@@ -100,14 +100,11 @@
                     <div class="PP_project-description-content">
                         <p>The engine also features Lua Scripting, allowing users to write and maintain code to create complex gameplay features.
                             I am currently using Sol2 bindings to allow the game engine to interact with script files, which greatly simplifies the process of compiling and running scripts.
-                            Whilst developing the scripting feature i tested numerous other languages such as python and C#, however found that Lua fit the lightweight style i was looking for.
+                            Whilst developing the scripting feature, I tested numerous other languages such as python and C#, however found that Lua fit the lightweight style i was looking for.
                         </p>
                         <img src="../Assets/Photos/Lua_language.webp" style="max-width: 150px; border:0; box-shadow: 0 0 0;">
-                        <p>Scripts are treated as an asset, being stored in the asset manager and, similarly to mesh's, are referenced in a dedicated component; ScriptComponent. This allows
-                            me to access the corresponding scripts for each object. Only one instance of a script is active at time, and is just passed the object ID of which object should be
-                            affected by the changes being made in the script. Currently an object can only have 1 script at a time, but i hope to find a work around to this issue soon.
-                        </p>
-                        <p>Below is the code for loading different scripts. Alot of the code is error checking, due to the nature of scripting languages. In sol, calling a stored function is no different to calling a standard c++ function.
+                        <p>Scripts are treated as an asset, being stored in the asset manager and, similarly to mesh's, are referenced in a dedicated component; ScriptComponent. This allows me to access the corresponding scripts for each object. Only one instance of a script is active at a time, and it just passes the object ID of which object should be affected by the changes being made in the script. Currently, an object can only have 1 script at a time, but i hope to find a work around to this issue soon.</p>
+                        <p>Below is the code for loading different scripts. A lot of the code is error checking, due to the nature of scripting languages. In sol, calling a stored function is no different to calling a standard c++ function.
                         </p>
                         <img src="../Assets/Photos/lualoading.png">
                     </div>
