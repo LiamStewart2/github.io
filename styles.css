@@ -552,6 +552,32 @@ body{
     border-radius: 10px;
 }
 
+.PP_project-code-snippet {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+pre code{
+    width:fit-content;
+    max-width: 1000px;
+    height:auto;
+    margin:10px auto;
+    box-shadow: 3px 3px 3px 1px rgba(255, 255, 255, 0.2);
+    border:2px solid white;
+    border-radius: 10px;
+}
+
+pre {
+    text-align: left;  
+    white-space: pre;
+    tab-size: 4;
+    font-size: 0.95rem;
+    line-height: 1.3; 
+}
+
 .PP_project-description-content a{
     color:white;
 }

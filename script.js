@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     titles.forEach(title => {
         title.addEventListener("click", () => {
+
+            const selection = window.getSelection();
+            if (selection && selection.toString().length > 0) {
+                return; // User is selecting text
+            }
+
             const section = title.closest(".PP_project-section");
             const content = section.querySelector(".PP_project-description-content");
             const isExpanded = section.classList.contains("active");

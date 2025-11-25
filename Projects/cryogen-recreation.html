@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <title>Cryogen Recreation</title>
 </head>
 <body>
@@ -46,7 +50,26 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>The Cryogen AI implementation uses a state-machine to manage the different states of the cryogens phases. An enum is used to track the different phases which is then checked when running the Update function in a switch statement.</p>
-                        <img src="../Assets/Photos/StateMachineOnDamage.png" width="500" height="auto">
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-csharp">public override void TakeDamage(int damage) {
+    ... Take damage logic
+    switch(m_CurrentPhase)
+    {
+        case CryogenPhase.PhaseOne:
+            if(m_CurrentHealth &lt;= m_MaxHealth * 0.7f) {
+                ChangePhase(CryogenPhase.PhaseTwo);
+            }
+            break;
+        case CryogenPhase.PhaseTwo:
+            if(m_CurrentHealth &lt;= m_MaxHealth * 0.35f) {
+                ChangePhase(CryogenPhase.PhaseThree);
+            }
+            break;
+    }
+}
+</code></pre>
+                        </div>
                     </div>
                 </div>
 
