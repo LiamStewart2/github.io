@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../styles.css" />
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <title>Invasion Madness</title>
 </head>
 <body>
@@ -49,12 +53,66 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>For this project, i built my first scene manager, capable of creating multiple "Scenes". A scene would be a child class of the parent scene class, having basic functions such as an Update, Render and HandleInput. These would be called by the owning SceneManager class to keep the game loop running.</p>
-                        <img src="../Assets/Photos/Parent Scene Class.png" style="max-width:600px;">
+                        
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">class Scene
+{
+public:
+	Scene(SDL_Window* _w, SDL_Renderer* _r) : window(_w), renderer(_r) {}
+	~Scene() {}
+
+	virtual void Init() = 0;
+	virtual void Cleanup() = 0;
+
+	virtual void Update() = 0;
+	virtual void Render() = 0;
+	virtual void HandleEvents() = 0;
+
+protected:
+	SDL_Window* window = nullptr;
+	SDL_Renderer* renderer = nullptr;
+};
+</code></pre>
+                        </div>
+                        
                         <p>The scene manager class would use a <a href="https://en.wikipedia.org/wiki/Singleton">singleton</a>, allowing the instance to be accessible globally through the use of static functions. The scene manager contains a LoadScene function, allowing the developer to load any class derived from the Scene class. The scene instance is stored on the heap in the scene manager and isnt moved to prevent issues with memory management.</p>
                         <p>The scene manager then contains some "middle man" functions to run the scene from the application without having to interact with the scene instance itself.</p>
-                        <img src="../Assets/Photos/Scene Manager.png" style="max-width:600px;">
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">class SceneManager
+{
+public:
+	SceneManager() {
+		if(instance == nullptr)
+			instance = this;
+	}
+	~SceneManager() { delete scene; }
+	static SceneManager* instance;
+	
+	bool IsRunning() {return isRunning;}
+
+	void UpdateScene();
+	void RenderScene();
+	void HandleSceneEvents();
+	
+	void LoadScene(Scene* _scene);
+	void CloseApplication() {isRunning = false;}
+
+	void SetJoystickReference(SDL_Joystick* joy) { joystick = joy; }
+	SDL_Joystick* GetJoystick() { return joystick; }
+private:
+	bool isRunning = false;
+	SDL_Joystick* joystick = nullptr;
+	Scene* scene = nullptr;
+};
+</code></pre>
+                        </div>
+                        
                         <p>This allows the developer to load scene very intuitively and simply.</p>
-                        <img src="../Assets/Photos/Loading a scene.png" style="max-width:600px;">
+                        
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">SceneManager::instance->LoadScene(new GameScene(window, renderer));
+</code></pre>
+                        </div>
                     </div>
                 </div>
 
@@ -65,7 +123,96 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>In this project, i implemented a reusable <a href="https://en.wikipedia.org/wiki/Object_pool_pattern">object pool</a> system using templates so that any object could be pooled. This sub-system was used for numerous features, such as the enemies, bullets and the particle effects.</p>
-                        <img src="../Assets/Photos/Object Pool.png">
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">template &lt;class T>
+class Object
+{
+public:
+	Object(T* _data, int _ID) { data = _data; ID = _ID; }
+	Object() {data = nullptr;}
+	T* data;
+	int ID = -1;
+	bool inUse = false;
+};
+
+// Allocate on the heap to avoid issues with the linked list crashing
+template &lt;class T>
+class ObjectPool
+{
+public:
+	ObjectPool() { InitPool(0); }
+	ObjectPool(int estimatedMax) { InitPool(estimatedMax); }
+	~ObjectPool() {}
+
+	std::vector&lt;Object&lt;T>*>* GetObjects() { return &objectsInUse; }
+	int GetNumberOfActiveObject() { return numberOfActiveObjects; }
+
+	// returns the first free object
+	// if no objects are free will add another object to the pool
+	Object&lt;T>* GetFreeObject()
+	{
+		numberOfActiveObjects += 1;
+		for (int i = likelyFirstAvailable; i < buffer.Size(); i++)
+		{
+			if (buffer[i].inUse == false)
+			{
+				buffer[i].inUse = true;
+				likelyFirstAvailable = i;
+				objectsInUse.push_back(&buffer[i]);
+				return &buffer[i];
+			}
+		}
+		// add new object to the buffer and remove later
+
+   		Object&lt;T>* object = buffer.Push(Object&lt;T>(new T(), buffer.Size()));
+
+		object->inUse = true;
+		objectsInUse.push_back(object);
+		likelyFirstAvailable = buffer.Size() - 1;
+		
+
+		return object;
+	}
+
+	// will disable the object and remove it from the objects in use list
+	void DisableObject(Object&lt;T>* object)
+	{
+		numberOfActiveObjects -= 1;
+		if(object->ID < likelyFirstAvailable)
+			likelyFirstAvailable = object->ID;
+		buffer[object->ID].inUse = false;
+		
+		for (int i = 0; i < objectsInUse.size(); i++)
+		{
+			if (objectsInUse[i]->ID == object->ID)
+			{
+				objectsInUse.erase(objectsInUse.begin() + i);
+				return;
+			}
+		}
+	}
+
+private:
+	// object buffer uses a linked list so that memory doesnt move when expanding
+	LinkedList&lt;Object&lt;T>> buffer;
+
+	// track the objects currently enabled to handle Update and Render calls
+	std::vector&lt;Object&lt;T>*> objectsInUse;
+
+	// keeps track of the rough first available object
+	// atleast tells us the rough area of where the algorithm should start looking for an unused object
+	int likelyFirstAvailable = 0;
+
+	int numberOfActiveObjects = 0;
+
+	void InitPool(int size)
+	{
+		for (int i = 0; i < size; i++)
+			buffer.Push(Object&lt;T>(new T(), i));
+	}
+};
+</code></pre>
+                        </div>
                         <p>The implementation uses a <a href="https://en.wikipedia.org/wiki/Linked_list">linked list</a> of object instances. Objects store "data" of type T, using templates letting us change what we are storing in each object pool. I then have numerous functions to manage this linked list, such as getting the next available object, disabling a certain object, or initializing the pool itself.</p>
                         <p>An optimisation of mine on top of the regular object pool was tracking where the first free to use object would be stored. This takes the expensive linear search algorithm which had a worse, and very common, case of o(n) time complexity. The optimised version is closer to an o(1) time complexity.</p>
                     </div>

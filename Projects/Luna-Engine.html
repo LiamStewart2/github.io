@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../styles.css" />
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <title>Luna Engine</title>
 </head>
 <body>
@@ -40,7 +44,38 @@
                         <img src="../Assets/Photos/ECS_Simple_Layout.svg.png" alt="Git branching diagram" />
                         <p>This game engine functions on an <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a>, where game objects are composed of numerous components, using the game object's ID to reference grouped components. This approach is far superior in terms of cache friendliness, as the CPU can load the array of components as contiguous chunks of memory instead of individually grabbing each piece of data.</p>    
                         <p>These components are then used by whatever system needs them. For example, the Rendering System would need access to a list of the mesh components and the transform components.</p>
-                        <img src="../Assets/Photos/Rendering System.png">
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">void ReworkedRenderer::Render(SceneManager* sceneManager, IFramebuffer* framebuffer, ObjectTransformPairing<Camera>* camera)
+{
+	framebuffer->Bind();
+
+	Scene* scene = sceneManager->GetCurrentScene();
+	EntityComponentSystem* ECS = scene->GetECS();
+
+	std::unordered_map&lt;unsigned int, MeshComponent&gt;& meshComponents = ECS->GetAllComponentsOfType&lt;MeshComponent&gt;();
+	std::unordered_map&lt;unsigned int, Transform&gt;& transforms = ECS->GetAllComponentsOfType&lt;Transform&gt;();
+	for (auto& [id, meshComponent] : meshComponents)
+	{
+		auto transformIt = transforms.find(meshComponent.gameObject);
+		if (transformIt != transforms.end())
+		{
+			// Bind mesh data and textures
+            meshComponent.mesh->BindMesh();
+            // ...
+
+			s_RendererAPI->RenderIndexed(meshComponent.mesh->GetIndexCount(), &transformIt->second);
+
+			meshComponent.shader->Unbind();
+		}
+	}
+
+	RenderSkybox(sceneManager, framebuffer);
+
+	framebuffer->Unbind();
+}
+</code></pre>
+                        </div>
                     </div>
                 </div>
 
@@ -106,7 +141,41 @@
                         <p>Scripts are treated as an asset, being stored in the asset manager and, similarly to mesh's, are referenced in a dedicated component; ScriptComponent. This allows me to access the corresponding scripts for each object. Only one instance of a script is active at a time, and it just passes the object ID of which object should be affected by the changes being made in the script. Currently, an object can only have 1 script at a time, but i hope to find a work around to this issue soon.</p>
                         <p>Below is the code for loading different scripts. A lot of the code is error checking, due to the nature of scripting languages. In sol, calling a stored function is no different to calling a standard c++ function.
                         </p>
-                        <img src="../Assets/Photos/lualoading.png">
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">void Script::Compile(std::string filepath)
+{
+	if(filepath == "") filepath = m_Filepath;
+	else m_Filepath = filepath;
+
+	m_LastCompilationTime = std::filesystem::last_write_time(filepath);
+
+	m_Lua.open_libraries(sol::lib::base, sol::lib::math);
+
+	m_CompiledScript = m_Lua.load_file(filepath);
+
+	if (!m_CompiledScript.valid()) 
+	{
+		sol::error err = m_CompiledScript;
+		std::cerr &lt;&lt; "[SCRIPT] " &lt;&lt; m_Filepath &lt;&lt; " filepath failed to compile: " &lt;&lt; err.what() &lt;&lt; std::endl;
+		return;
+	}
+
+	BindFunctions();
+
+	sol::protected_function_result result = m_CompiledScript();
+	if (!result.valid())
+	{
+		sol::error err = result;
+		std::cerr &lt;&lt; "[SCRIPT]" &lt;&lt; m_Filepath &lt;&lt; " runtime error: " &lt;&lt; err.what() &lt;&lt; std::endl;
+		return;
+	}
+
+	m_Start = m_Lua["Start"];
+	m_Update = m_Lua["Update"];
+}
+</code></pre>
+                        </div>
                     </div>
                 </div>
 

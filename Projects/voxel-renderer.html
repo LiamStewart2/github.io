@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <title>Voxel Renderer</title>
 </head>
 <body>
@@ -49,7 +53,10 @@
                         <img src="../Assets/Photos/blockAtlas.png">    
                         <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendered without needing to take breaks for different voxel types.</p>
                         <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
-                        <img src="../Assets/Photos/TextureAtlasUsage.png">
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">chunkMesh.loadMeshData(&FaceData::TOP, glm::vec3(x, y, z), textureAtlas->getTextureCoordinateOffset(currentBlock->topTexture));
+</code></pre>
+                        </div>
                     </div>
                 </div>
 
@@ -60,7 +67,39 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>The generated terrain uses a <a href="https://en.wikipedia.org/wiki/Perlin_noise">perlin noise</a> implementation to span very large distances without the need for manually building a map. I took a similar approach to Minecraft when it came to using perlin noise, where multiple different layers of perlin noise are used on top of each other.</p>
-                        <img src="../Assets/Photos/Generate Chunk.png">
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">void Chunk::generateTerrain(PerlinNoise* terrainGenerationNoise)
+{
+	for (int x = 0; x < config::chunkWidth; x++)
+	{
+		for (int z = 0; z < config::chunkHeight; z++)
+		{
+			glm::vec3 blockWorldPosition = getBlockWorldPosition(glm::vec3(x, 0, z));
+
+			// is offset to aboid perlin noise borders - the player has to travel 128 chunks to find a perlin noise border
+			double heightValue = terrainGenerationNoise->octaveNoise((blockWorldPosition.x + config::chunkWidth * 128) / (config::chunkWidth * 1.5f), (blockWorldPosition.z + config::chunkHeight * 128) / (config::chunkHeight * 1.5f), 3, 0.6);
+			double crazyValue = terrainGenerationNoise->octaveNoise((blockWorldPosition.x + config::chunkWidth * 128) / (config::chunkWidth * 1.5f), (blockWorldPosition.z + config::chunkHeight * 128) / (config::chunkHeight * 1.5f), 2, 0.004);
+
+			int height = (config::chunkHeight / 2) + static_cast&lt;int>((config::chunkHeight * heightValue * ((crazyValue + 1))));
+
+
+			for (int y = 0; y < config::chunkLayers; y++)
+			{
+				int index = getIndexFromRelativePosition(x, y, z);
+
+
+				if (y == height)
+					blockBuffer[index] = &BlockDatabase::Grass;
+				else if(y < height)
+					blockBuffer[index] = &BlockDatabase::Dirt;
+				else
+					blockBuffer[index] = &BlockDatabase::Air;
+			}
+		}
+	}
+}
+</code></pre>
+                        </div>
                         <p>This is a very simple usage of perlin noise, and has the issue where a border is formed every 128 chunks, however, the generation still expands infinitely, essentially looping the generated terrain there onwards.</p>
                     </div>
                 </div>
