@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
-    <title>Liam Stewart</title>
+    <title>Projects</title>
 </head>
 <body>
+    <nav>
+        <a href="index.html" class="PP_back-button">Home</a>
+    </nav>
     <div class="content">
         <div class="intro-section">
             <video autoplay muted loop>
@@ -19,33 +22,16 @@
                     <a href="https://www.linkedin.com/in/liam-stewart-8a7866298/"><i class="fa-brands fa-linkedin"></i></a>
                     <a href="https://www.youtube.com/@liamstewart2599"><i class="fa-brands fa-youtube"></i></a>
                 </div>
-                <div class="top-bar-cv">
-                    <a href="Assets/CV/Liam Oliver Stewart - Public.pdf">View CV</a>
-                </div>
             </div>
             <h1>Liam Stewart</h1>
             <h2><i>Programmer</i></h2>
             <div class="seperation-line"></div>
             <p>Programmer with experience using C++, C#, Git, OpenGL, Unity and Unreal.</p>
         </div>
-        <div class="navigation">
-            <ul>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about-me">About Me</a></li>
-                <li><a href="#contacts">Contact Me</a></li>
-            </ul>
-        </div>
-
-        <div class="about-me">
-            <h3><u>Hi, I'm Liam</u></h3>
-            <p>I am a 19-year-old programmer currently studying Games Programming at Staffordshire University, with a passion for low-level graphics programming.</p>
-            <p>From a young age, playing games on my dad's PC, I was always curious about how things worked; how you could place monkeys in Bloons Tower Defense 5, or how the world of Minecraft seemed to go on forever. That curiosity drives my projects and fuels my interest in building efficient, scalable systems</p>
-            <p>Outside the world of programming, I enjoy gaming, with over 4000 hours on steam alone, spending most my time in competitive shooters, factory simulations and the occasional game of pool or darts with friends and family. Additionally, i build PC's (when there isnt a ram shortage) and love to cook.</p>
-        </div>
         
         
         <div class="project-section" id="projects">
-            <h3><u>Featured Projects</u></h3>
+            <h3><u>My Projects</u></h3>
             <div class="projects">
                 <a href="Projects/Luna-Engine.html" class="project">
                     <div class="video-section">
@@ -74,6 +60,86 @@
                 </a>
 
 
+                <a href="Projects/OpenGL-Simulation.html" class="project">
+                    <div class="video-section">
+                        <video loop autoplay muted>
+                            <source src="Assets/Videos/2026-01-19 19-30-43.mp4" type="video/mp4">
+                            Your browser doesnt support the video tag
+                        </video>
+                        <div class="project-details">
+                            <div class="group-size">
+                                <i class="fa-solid fa-user-group"></i>
+                                <p>1</p>
+                            </div>
+                            <div class="tech">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <p>OpenGL - C++</p>
+                            </div>
+                            <div class="multiplatform">
+                                <i class="fa-brands fa-windows"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <h4><u>OpenGL Simulation</u></h4>
+                        <p>A simulation of a 3D scene rendered using OpenGL and C++. Features include a scene graph, camera system, lighting, and texture mapping. My first time developing a traditional render pipeline, using legacy OpenGL features. Was a part of my introduction to graphics module.</p>
+                    </div>
+                </a>
+
+
+                <a href="Projects/Invasion-madness.html" class="project">
+                    <div class="video-section">
+                        <video loop autoplay muted>
+                            <source src="Assets/Videos/2025-06-19 04-59-47.mp4" type="video/mp4">
+                            Your browser doesnt support the video tag
+                        </video>
+                        <div class="project-details">
+                            <div class="group-size">
+                                <i class="fa-solid fa-user-group"></i>
+                                <p>1</p>
+                            </div>
+                            <div class="tech">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <p>C++ - SDL</p>
+                            </div>
+                            <div class="multiplatform">
+                                <i class="fa-brands fa-windows"></i>
+                                <i class="fa-brands fa-linux"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <h4><u>Invasion Madness</u></h4>
+                        <p>My submission for the bespoke platform development unit, building a game for a restricted console platform. The game featured scene management, audio management, particle systems and was built onto a handheld console with no bugs.</p>
+                    </div>
+                </a>
+                <a href="Projects/cryogen-recreation.html" class="project">
+                    <div class="video-section">
+                        <video loop autoplay muted>
+                            <source src="Assets/Videos/2025-06-01 22-36-59.mp4" type="video/mp4">
+                            Your browser doesnt support the video tag
+                        </video>
+                        <div class="project-details">
+                            <div class="group-size">
+                                <i class="fa-solid fa-user-group"></i>
+                                <p>1</p>
+                            </div>
+                            <div class="tech">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <p>Unity - C#</p>
+                            </div>
+                            <div class="multiplatform">
+                                <i class="fa-brands fa-windows"></i>
+                                <i class="fa-brands fa-linux"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <h4><u>Cryogen Boss Fight</u></h4>
+                        <p>Recreated a boss fight from a popular Terraria mod, "Calamity" using the Unity engine for a solo university module. Additionally, it included other common features, such as an inventory system.</p>
+                    </div>
+                </a>
+                
                 <a href="Projects/RTS-engine.html" class="project">
                     <div class="video-section">
                         <video loop autoplay muted>
@@ -127,72 +193,15 @@
                         <p>My solo attempt at recreating a voxel engine similar to Minecraft. Features endless voxel terrain generation and significantly greater render distances compared to Minecraft.</p>
                     </div>
                 </a>
+            
                 
             </div>
-            <p style="font-size:large">See my other projects <b><u><a href="projects.html">Here</a></u></b></p>
+            <p>See some of my other work on <a href="https://www.youtube.com/@liamstewart2599"><i class="fa-brands fa-youtube"></i></a></p>
         </div>
 
         <div class="about-me-section" id="about-me">
             <div class="education">
 
-            </div>
-            
-            <div class="tech-stack-section">
-                <h3><u>Tech Stack</u></h3>
-                <div class="tech-stack-list">
-                    <ul>
-                        <li>C++</li>
-                        <li>C#</li>
-                        <li>Python</li>
-                        <li>Git</li>
-                        <li>Visual Studio</li>
-                        <li>OpenGL</li>
-                        <li>DirectX 11</li>
-                        <li>SDL2</li>
-                        <li>SFML</li>
-                        <li>ImGui</li>
-                        <li>Unreal Engine 5</li>
-                        <li>Unity</li>
-                        <li>HTML</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="my-games-list">
-                <h3><u>Favourite Games</u></h3>
-                <div class="games-list">
-                    <div class="games-section">
-                        <h4><i><u>Multi-Player Games</i></u></h4>
-                        <ul>
-                            <li>Valorant</li>
-                            <li>League Of Legends</li>
-                            <li>Counter Strike</li>
-                            <li>Warframe</li>
-                            <li>Roblox</li>
-                        </ul>
-                    </div>
-                    <div class="games-section">
-                        <h4><i><u>Single-Player Games</u></i></h4>
-                        <ul>
-                            <li>Cyberpunk</li>
-                            <li>Hollow Knight</li>
-                            <li>Factorio</li>
-                            <li>Forza Horizon 5</li>
-                            <li>Elden Ring</li>
-                            <li>WRC5</li>
-                            <li>Terraria</li>
-                            <li>Balatro</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="contacts-section" id="contacts">
-                <h3><u>Contacts</u> </h3>
-                <ul>
-                    <li><a href="mailto:liam.oliver.stewart@gmail.com"><i class="fa-solid fa-envelope"></i>liam.oliver.stewart@gmail.com</a></li>
-                    <li><a href="https://www.linkedin.com/in/liam-stewart-8a7866298/"><i class="fa-brands fa-linkedin"></i>Liam Stewart</a></li>
-                </ul>
             </div>
         </div>
     </div>
