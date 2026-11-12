@@ -4,195 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Liam Stewart - games and graphics programmer working in C++, OpenGL, DirectX 11, Unity and Unreal.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <title>Liam Stewart</title>
 </head>
 <body>
-    <div class="content">
-        <div class="intro-section">
-            <video autoplay muted loop playsinline>
-                <source src="Assets/Videos/Showcase.mp4" type="video/mp4">
-            </video>
-            <div class="top-bar">
-                <div class="top-bar-links">
-                    <a href="https://github.com/LiamStewart2" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/liam-stewart-8a7866298/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/@liamstewart2599" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-                <div class="top-bar-cv">
-                    <a href="Assets/CV/Liam Oliver Stewart - Public.pdf">View CV</a>
-                </div>
-            </div>
-            <h1>Liam Stewart</h1>
-            <h2><i>Programmer</i></h2>
-            <div class="seperation-line"></div>
-            <p>Programmer with experience using C++, C#, Git, OpenGL, Unity and Unreal.</p>
-        </div>
-        <div class="navigation">
-            <ul>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="#top" class="site-logo">Liam Stewart<span>_</span></a>
+            <ul class="site-nav">
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#about-me">About Me</a></li>
-                <li><a href="#contacts">Contact Me</a></li>
+                <li><a href="#about-me">About</a></li>
+                <li><a href="#contacts">Contact</a></li>
+                <li><a class="button" href="Assets/CV/Liam Oliver Stewart - Public.pdf">CV</a></li>
             </ul>
         </div>
+    </header>
 
-        <div class="about-me" id="about-me">
-            <h3><u>Hi, I'm Liam</u></h3>
-            <p>I am a 19-year-old programmer currently studying Games Programming at Staffordshire University, with a passion for low-level graphics programming.</p>
-            <p>From a young age, playing games on my dad's PC, I was always curious about how things worked; how you could place monkeys in Bloons Tower Defense 5, or how the world of Minecraft seemed to go on forever. That curiosity drives my projects and fuels my interest in building efficient, scalable systems.</p>
-            <p>Outside the world of programming, I enjoy gaming, with over 4000 hours on Steam alone, spending most of my time in competitive shooters, factory simulations and the occasional game of pool or darts with friends and family. Additionally, I build PCs (when there isn't a RAM shortage) and love to cook.</p>
-        </div>
-        
-        
-        <div class="project-section" id="projects">
-            <h3><u>Featured Projects</u></h3>
+    <main class="content" id="top">
+        <section class="intro-section">
+            <video autoplay muted loop playsinline aria-hidden="true">
+                <source src="Assets/Videos/Showcase.mp4" type="video/mp4">
+            </video>
+            <div class="hero-text">
+                <p class="hero-kicker">&gt; Games Programming student @ Staffordshire University</p>
+                <h1>Liam Stewart</h1>
+                <p class="hero-role">Graphics &amp; Engine Programmer</p>
+                <p class="hero-summary">I build engines, renderers and the systems underneath games, mostly in C++ with OpenGL and DirectX 11.</p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#projects">View projects</a>
+                    <a class="button" href="Assets/CV/Liam Oliver Stewart - Public.pdf">View CV</a>
+                    <div class="social-links">
+                        <a href="https://github.com/LiamStewart2" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/liam-stewart-8a7866298/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/@liamstewart2599" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <h2 class="section-title">Featured Projects</h2>
             <div class="projects">
                 <a href="Projects/Luna-Engine.html" class="project">
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-10-05 23-19-01.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
-                            <div class="group-size">
-                                <i class="fa-solid fa-user-group"></i>
-                                <p>1</p>
-                            </div>
-                            <div class="tech">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
-                                <p>DirectX11 - C++</p>
-                            </div>
-                            <div class="multiplatform">
-                                <i class="fa-brands fa-windows"></i>
-                            </div>
+                            <div class="group-size"><i class="fa-solid fa-user-group" aria-label="Team size"></i><p>1</p></div>
+                            <div class="tech"><i class="fa-solid fa-screwdriver-wrench" aria-label="Tech"></i><p>DirectX11 - C++</p></div>
+                            <div class="multiplatform"><i class="fa-brands fa-windows" aria-label="Windows"></i></div>
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>Luna Engine</u></h4>
+                        <h4>Luna Engine</h4>
                         <p>A work-in-progress game engine built with C++ and DirectX 11. Early development includes an ECS, Shadows, Phong Lighting, Normal Mapping, Lua scripting, ImGui with docking and Scene Serialization.</p>
                     </div>
                 </a>
-
 
                 <a href="Projects/RTS-engine.html" class="project">
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
-                            <div class="group-size">
-                                <i class="fa-solid fa-user-group"></i>
-                                <p>3</p>
-                            </div>
-                            <div class="tech">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
-                                <p>SFML - C++</p>
-                            </div>
-                            <div class="multiplatform">
-                                <i class="fa-brands fa-windows"></i>
-                            </div>
+                            <div class="group-size"><i class="fa-solid fa-user-group" aria-label="Team size"></i><p>3</p></div>
+                            <div class="tech"><i class="fa-solid fa-screwdriver-wrench" aria-label="Tech"></i><p>SFML - C++</p></div>
+                            <div class="multiplatform"><i class="fa-brands fa-windows" aria-label="Windows"></i></div>
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>RTS Engine</u></h4>
+                        <h4>RTS Engine</h4>
                         <p>A volunteer project I worked on with several other developers to build an RTS engine featuring robust isometric rendering, boid agents, and fog of war.</p>
                     </div>
                 </a>
-
 
                 <a href="Projects/voxel-renderer.html" class="project">
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-05-15 13-25-44.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
-                            <div class="group-size">
-                                <i class="fa-solid fa-user-group"></i>
-                                <p>1</p>
-                            </div>
-                            <div class="tech">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
-                                <p>OpenGL - C++</p>
-                            </div>
-                            <div class="multiplatform">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
+                            <div class="group-size"><i class="fa-solid fa-user-group" aria-label="Team size"></i><p>1</p></div>
+                            <div class="tech"><i class="fa-solid fa-screwdriver-wrench" aria-label="Tech"></i><p>OpenGL - C++</p></div>
+                            <div class="multiplatform"><i class="fa-brands fa-windows" aria-label="Windows"></i><i class="fa-brands fa-linux" aria-label="Linux"></i></div>
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>Voxel Renderer</u></h4>
+                        <h4>Voxel Renderer</h4>
                         <p>My solo attempt at recreating a voxel engine similar to Minecraft. Features endless voxel terrain generation and significantly greater render distances compared to Minecraft.</p>
                     </div>
                 </a>
-                
             </div>
-            <p style="font-size:large">See my other projects <b><u><a href="projects.html">Here</a></u></b></p>
-        </div>
+            <a class="more-link" href="projects.html">See all projects &rarr;</a>
+        </section>
 
-        <div class="about-me-section" id="skills">
-            <div class="tech-stack-section">
-                <h3><u>Tech Stack</u></h3>
-                <div class="tech-stack-list">
-                    <ul>
-                        <li>C++</li>
-                        <li>C#</li>
-                        <li>Python</li>
-                        <li>Git</li>
-                        <li>Visual Studio</li>
-                        <li>OpenGL</li>
-                        <li>DirectX 11</li>
-                        <li>SDL2</li>
-                        <li>SFML</li>
-                        <li>ImGui</li>
-                        <li>Unreal Engine 5</li>
-                        <li>Unity</li>
-                        <li>HTML</li>
-                    </ul>
+        <section class="section" id="about-me">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="panel about-text">
+                    <h3>Hi, I'm Liam</h3>
+                    <p>I am a 19-year-old programmer currently studying Games Programming at Staffordshire University, with a passion for low-level graphics programming.</p>
+                    <p>From a young age, playing games on my dad's PC, I was always curious about how things worked; how you could place monkeys in Bloons Tower Defense 5, or how the world of Minecraft seemed to go on forever. That curiosity drives my projects and fuels my interest in building efficient, scalable systems.</p>
+                    <p>Outside the world of programming, I enjoy gaming, with over 4000 hours on Steam alone, spending most of my time in competitive shooters, factory simulations and the occasional game of pool or darts with friends and family. Additionally, I build PCs (when there isn't a RAM shortage) and love to cook.</p>
+                </div>
+
+                <div class="about-side">
+                    <div class="panel" id="skills">
+                        <h3>Tech Stack</h3>
+                        <div class="stack-group">
+                            <span class="stack-label">Languages</span>
+                            <ul class="tag-list"><li>C++</li><li>C#</li><li>Python</li><li>HTML</li></ul>
+                        </div>
+                        <div class="stack-group">
+                            <span class="stack-label">Graphics APIs</span>
+                            <ul class="tag-list"><li>OpenGL</li><li>DirectX 11</li></ul>
+                        </div>
+                        <div class="stack-group">
+                            <span class="stack-label">Engines &amp; Libraries</span>
+                            <ul class="tag-list"><li>Unreal Engine 5</li><li>Unity</li><li>SDL2</li><li>SFML</li><li>ImGui</li></ul>
+                        </div>
+                        <div class="stack-group">
+                            <span class="stack-label">Tools</span>
+                            <ul class="tag-list"><li>Git</li><li>Visual Studio</li></ul>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h3>Favourite Games</h3>
+                        <div class="games-columns">
+                            <div>
+                                <h4>Multiplayer</h4>
+                                <ul>
+                                    <li>Valorant</li>
+                                    <li>League Of Legends</li>
+                                    <li>Counter Strike</li>
+                                    <li>Warframe</li>
+                                    <li>Roblox</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Single-player</h4>
+                                <ul>
+                                    <li>Cyberpunk</li>
+                                    <li>Hollow Knight</li>
+                                    <li>Factorio</li>
+                                    <li>Forza Horizon 5</li>
+                                    <li>Elden Ring</li>
+                                    <li>WRC5</li>
+                                    <li>Terraria</li>
+                                    <li>Balatro</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="my-games-list">
-                <h3><u>Favourite Games</u></h3>
-                <div class="games-list">
-                    <div class="games-section">
-                        <h4><i><u>Multi-Player Games</u></i></h4>
-                        <ul>
-                            <li>Valorant</li>
-                            <li>League Of Legends</li>
-                            <li>Counter Strike</li>
-                            <li>Warframe</li>
-                            <li>Roblox</li>
-                        </ul>
-                    </div>
-                    <div class="games-section">
-                        <h4><i><u>Single-Player Games</u></i></h4>
-                        <ul>
-                            <li>Cyberpunk</li>
-                            <li>Hollow Knight</li>
-                            <li>Factorio</li>
-                            <li>Forza Horizon 5</li>
-                            <li>Elden Ring</li>
-                            <li>WRC5</li>
-                            <li>Terraria</li>
-                            <li>Balatro</li>
-                        </ul>
-                    </div>
+        </section>
+
+        <section class="section contact" id="contacts">
+            <h2 class="section-title">Contact</h2>
+            <div class="panel">
+                <p>Want to talk about a project, a role, or graphics programming in general? Get in touch.</p>
+                <div class="contact-links">
+                    <a class="button primary" href="mailto:liam.oliver.stewart@gmail.com"><i class="fa-solid fa-envelope"></i>Email me</a>
+                    <a class="button" href="https://www.linkedin.com/in/liam-stewart-8a7866298/"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+                    <a class="button" href="https://github.com/LiamStewart2"><i class="fa-brands fa-github"></i>GitHub</a>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="contacts-section" id="contacts">
-                <h3><u>Contacts</u> </h3>
-                <ul>
-                    <li><a href="mailto:liam.oliver.stewart@gmail.com"><i class="fa-solid fa-envelope"></i>liam.oliver.stewart@gmail.com</a></li>
-                    <li><a href="https://www.linkedin.com/in/liam-stewart-8a7866298/"><i class="fa-brands fa-linkedin"></i>Liam Stewart</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        Liam Stewart &middot; liam.oliver.stewart@gmail.com
+    </footer>
 </body>
 </html>

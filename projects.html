@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Liam Stewart - games and graphics programmer working in C++, OpenGL, DirectX 11, Unity and Unreal.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
-    <title>Projects</title>
+    <title>Projects - Liam Stewart</title>
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="PP_back-button">Home</a>
-    </nav>
-    <div class="content">
-        <div class="intro-section">
-            <video autoplay muted loop playsinline>
-                <source src="Assets/Videos/Showcase.mp4" type="video/mp4">
-            </video>
-            <div class="top-bar">
-                <div class="top-bar-links">
-                    <a href="https://github.com/LiamStewart2" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/liam-stewart-8a7866298/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/@liamstewart2599" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-            </div>
-            <h1>Liam Stewart</h1>
-            <h2><i>Programmer</i></h2>
-            <div class="seperation-line"></div>
-            <p>Programmer with experience using C++, C#, Git, OpenGL, Unity and Unreal.</p>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="index.html" class="site-logo">Liam Stewart<span>_</span></a>
+            <ul class="site-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" aria-current="page">Projects</a></li>
+                <li><a href="index.html#about-me">About</a></li>
+                <li><a href="index.html#contacts">Contact</a></li>
+                <li><a class="button" href="Assets/CV/Liam Oliver Stewart - Public.pdf">CV</a></li>
+            </ul>
         </div>
-        
-        
-        <div class="project-section" id="projects">
-            <h3><u>My Projects</u></h3>
+    </header>
+    <main class="content">
+        <section class="section" id="projects">
+            <h1 class="section-title">All Projects</h1>
             <div class="projects">
                 <a href="Projects/Luna-Engine.html" class="project">
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-10-05 23-19-01.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -56,7 +49,7 @@
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>Luna Engine</u></h4>
+                        <h4>Luna Engine</h4>
                         <p>A work-in-progress game engine built with C++ and DirectX 11. Early development includes an ECS, Shadows, Phong Lighting, Normal Mapping, Lua scripting, ImGui with docking and Scene Serialization.</p>
                     </div>
                 </a>
@@ -66,7 +59,6 @@
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2026-01-19 19-30-43.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -83,7 +75,7 @@
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>OpenGL Simulation</u></h4>
+                        <h4>OpenGL Simulation</h4>
                         <p>A simulation of a 3D scene rendered using OpenGL and C++. Features include a scene graph, camera system, lighting, and texture mapping. My first time developing a traditional render pipeline, using legacy OpenGL features. Was a part of my introduction to graphics module.</p>
                     </div>
                 </a>
@@ -93,7 +85,6 @@
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-06-19 04-59-47.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -111,7 +102,7 @@
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>Invasion Madness</u></h4>
+                        <h4>Invasion Madness</h4>
                         <p>My submission for the bespoke platform development unit, building a game for a restricted console platform. The game featured scene management, audio management, particle systems and was built onto a handheld console with no bugs.</p>
                     </div>
                 </a>
@@ -119,7 +110,6 @@
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-06-01 22-36-59.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -137,7 +127,7 @@
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>Cryogen Boss Fight</u></h4>
+                        <h4>Cryogen Boss Fight</h4>
                         <p>Recreated a boss fight from a popular Terraria mod, "Calamity" using the Unity engine for a solo university module. Additionally, it included other common features, such as an inventory system.</p>
                     </div>
                 </a>
@@ -146,7 +136,6 @@
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -163,7 +152,7 @@
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>RTS Engine</u></h4>
+                        <h4>RTS Engine</h4>
                         <p>A volunteer project I worked on with several other developers to build an RTS engine featuring robust isometric rendering, boid agents, and fog of war.</p>
                     </div>
                 </a>
@@ -173,7 +162,6 @@
                     <div class="video-section">
                         <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-05-15 13-25-44.mp4" type="video/mp4">
-                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -191,16 +179,15 @@
                         </div>
                     </div>
                     <div class="project-description">
-                        <h4><u>Voxel Renderer</u></h4>
+                        <h4>Voxel Renderer</h4>
                         <p>My solo attempt at recreating a voxel engine similar to Minecraft. Features endless voxel terrain generation and significantly greater render distances compared to Minecraft.</p>
                     </div>
                 </a>
             
                 
             </div>
-            <p>See some of my other work on <a href="https://www.youtube.com/@liamstewart2599" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></p>
-        </div>
-
-    </div>
+            <a class="more-link" href="https://www.youtube.com/@liamstewart2599">More of my work on YouTube &rarr;</a>
+        </section>
+    </main>
 </body>
 </html>
