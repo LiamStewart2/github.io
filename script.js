@@ -16,38 +16,63 @@ document.addEventListener("DOMContentLoaded", function () {
         lazyVideos.forEach(tryPlay);
     }
 
-    const titles = document.querySelectorAll(".PP_project-section");
+    // ---- Collapsible project sections ----
+    const sections = Array.from(document.querySelectorAll(".PP_project-section"));
+    const expandAllButton = document.querySelector(".PP_expand-all");
 
-    titles.forEach(title => {
-        title.addEventListener("click", () => {
+    function setOpen(section, open) {
+        const title = section.querySelector(".PP_project-section-title");
+        const content = section.querySelector(".PP_project-description-content");
+        if (section.classList.contains("active") === open) return;
 
-            const selection = window.getSelection();
-            if (selection && selection.toString().length > 0) {
-                return; // User is selecting text
-            }
+        title.setAttribute("aria-expanded", String(open));
 
-            const section = title.closest(".PP_project-section");
-            const content = section.querySelector(".PP_project-description-content");
-            const isExpanded = section.classList.contains("active");
+        if (open) {
+            section.classList.add("active");
+            content.style.maxHeight = content.scrollHeight + "px";
+            // Release the fixed height once the animation is done so lazy-loaded
+            // images can grow the section. The timeout covers reduced-motion,
+            // where no transition (and so no transitionend) happens.
+            const release = () => { if (section.classList.contains("active")) content.style.maxHeight = "none"; };
+            content.addEventListener("transitionend", release, { once: true });
+            setTimeout(release, 300);
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.offsetHeight; // force reflow so the collapse animates
+            content.style.maxHeight = "0px";
+            section.classList.remove("active");
+        }
+    }
 
-            if (isExpanded) {
-                // COLLAPSE
-                content.style.maxHeight = content.scrollHeight + "px"; // Set current height
-                // Force reflow
-                content.offsetHeight; 
-                content.style.maxHeight = "0px";
-                section.classList.remove("active");
-            } else {
-                // EXPAND
-                section.classList.add("active");
-                content.style.maxHeight = content.scrollHeight + "px";
+    function updateExpandAllLabel() {
+        if (!expandAllButton) return;
+        const allOpen = sections.every(s => s.classList.contains("active"));
+        expandAllButton.textContent = allOpen ? "Collapse all" : "Expand all";
+    }
 
-                // Remove max-height after animation to allow auto-resizing
-                content.addEventListener("transitionend", function handler() {
-                    content.style.maxHeight = "none";
-                    content.removeEventListener("transitionend", handler);
-                });
-            }
+    sections.forEach(section => {
+        const title = section.querySelector(".PP_project-section-title");
+        // Only the title row toggles, so clicking inside open content
+        // (code, links, images) doesn't snap the section shut.
+        title.setAttribute("role", "button");
+        title.setAttribute("tabindex", "0");
+        title.setAttribute("aria-expanded", "false");
+
+        const toggle = () => {
+            setOpen(section, !section.classList.contains("active"));
+            updateExpandAllLabel();
+        };
+        title.addEventListener("click", toggle);
+        title.addEventListener("keydown", e => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
         });
     });
+
+    if (expandAllButton) {
+        expandAllButton.addEventListener("click", () => {
+            const open = !sections.every(s => s.classList.contains("active"));
+            sections.forEach(s => setOpen(s, open));
+            updateExpandAllLabel();
+        });
+    }
 });

@@ -49,8 +49,6 @@ img, video{ max-width: 100%; }
 .project,
 .panel,
 .intro-section,
-.PP_project-introduction-section,
-.PP_project-overview,
 .PP_project-section{
     border: 2px solid var(--line);
     border-radius: var(--bold-border-radius);
@@ -189,12 +187,6 @@ img, video{ max-width: 100%; }
 }
 .social-links a{ transition: 0.2s; }
 .social-links a:hover{ color: var(--accent); }
-
-.seperation-line{
-    margin: 0 auto;
-    width: 60%;
-    border-bottom: 1px solid var(--line);
-}
 
 /* =========================================================
    Sections
@@ -397,81 +389,117 @@ img, video{ max-width: 100%; }
 /* =========================================================
    Project detail pages (PP_)
    ========================================================= */
-body > nav{
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    display: flex;
-    gap: 14px;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 14px 24px;
-    background: rgba(10, 10, 10, 0.88);
-    backdrop-filter: blur(6px);
+/* Title + tags on one line, tagline + "View source" on the next.
+   Collapses to one column on narrower screens. */
+.PP_project-header{
+    padding: 36px 0 0;
+    display: grid;
+    grid-template-columns: fit-content(60%) minmax(0, 1fr);
+    grid-template-areas:
+        "crumb   crumb"
+        "title   facts"
+        "tagline source";
+    column-gap: 32px;
+    align-items: center;
 }
-
-.PP_back-button,
-.PP_github-button{
-    padding: 3px 12px;
+.PP_breadcrumb{
+    grid-area: crumb;
+    justify-self: start;
+    color: var(--muted);
+    font-size: 14px;
     text-decoration: none;
-    font-weight: 700;
-    border: 2px solid var(--line);
-    border-radius: var(--bold-border-radius);
-    box-shadow: 3px 3px 0 0 var(--shadow);
+    margin-bottom: 10px;
     transition: 0.2s;
 }
-.PP_back-button::before{ content: "\2190  "; }
-.PP_github-button{ margin-left: auto; }
-.PP_back-button:hover,
-.PP_github-button:hover{
+.PP_breadcrumb:hover{ color: var(--accent); }
+.PP_project-header h1{
+    grid-area: title;
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    letter-spacing: -1px;
+    margin: 0;
+}
+.PP_tagline{
+    grid-area: tagline;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #d6d6d6;
+    margin: 6px 0 0;
+}
+.PP_source{
+    grid-area: source;
+    justify-self: end;
+    margin-top: 6px;
+    padding: 3px 12px;
+    font-size: 14px;
+}
+.PP_facts{
+    grid-area: facts;
+    justify-self: end;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.PP_facts li{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 10px;
+    font-size: 14px;
     color: var(--accent);
-    border-color: var(--accent);
-    box-shadow: 2px 2px 0 0 var(--accent);
-}
-
-.PP_project-introduction-section{
-    text-align: center;
-    margin-top: 24px;
-    padding: 28px 24px;
-}
-.PP_project-introduction-section h1{
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin: 0 0 16px;
-}
-.PP_project-introduction-section p{
-    color: var(--muted);
-    margin: 16px 0 0;
+    border: 1px solid rgba(144, 255, 100, 0.55);
+    border-radius: var(--bold-border-radius);
 }
 
 .PP_project-overview{
-    margin: 40px 0 0;
-    padding: 28px;
-    text-align: center;
+    margin: 28px 0 0;
 }
 .PP_project-overview > video{
+    display: block;
     width: 100%;
-    max-width: 960px;
+    background: #000;
     border: 2px solid var(--line);
     border-radius: var(--bold-border-radius);
     box-shadow: 6px 6px 0 0 var(--shadow);
-    margin: 0 0 24px;
+    margin: 0 0 36px;
 }
 
-.PP_project-description{ text-align: left; }
 .PP_project-description > p{
     max-width: 75ch;
-    margin: 0 auto 28px;
+    margin: 0 0 28px;
     font-size: 17px;
+}
+
+.PP_section-toolbar{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 4px;
+}
+.PP_expand-all{
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    background: none;
+    border: 0;
+    padding: 4px 0;
+    cursor: pointer;
+}
+.PP_expand-all:hover{ text-decoration: underline; }
+.PP_expand-all:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
 }
 
 .PP_project-section{
     margin: 18px 0;
-    cursor: pointer;
     background-color: transparent;
     box-shadow: 4px 4px 0 0 var(--shadow);
     transition: 0.2s;
 }
-.PP_project-section:hover{
+.PP_project-section:has(.PP_project-section-title:hover){
     border-color: var(--accent);
     box-shadow: 3px 3px 0 0 var(--accent);
 }
@@ -480,6 +508,12 @@ body > nav{
     display: flex;
     align-items: center;
     padding: 0 22px;
+    cursor: pointer;
+    user-select: none;
+}
+.PP_project-section-title:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
 }
 .PP_project-section-title h3{
     margin: 18px 0;
@@ -489,7 +523,7 @@ body > nav{
     margin-left: auto;
     transition: transform 0.2s;
 }
-.PP_project-section:hover .PP_project-section-title i{ color: var(--accent); }
+.PP_project-section-title:hover i{ color: var(--accent); }
 .PP_project-section.active .PP_project-section-title i{ transform: rotate(180deg); }
 
 .PP_project-description-content{
@@ -545,15 +579,59 @@ pre code{
     border-radius: var(--bold-border-radius);
 }
 
+/* Previous / next project */
+.PP_pager{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 64px 0 0;
+}
+.PP_pager-link{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 9px 16px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    border: 2px solid var(--line);
+    border-radius: var(--bold-border-radius);
+    box-shadow: 4px 4px 0 0 var(--shadow);
+    transition: 0.2s;
+}
+.PP_pager-link span{
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+.PP_pager-link.next{ text-align: right; margin-left: auto; }
+.PP_pager-link:hover{
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 2px 2px 0 0 var(--accent);
+    transform: translate(2px, 2px);
+}
+
 /* =========================================================
    Responsive
    ========================================================= */
+@media (max-width: 1100px){
+    .PP_project-header{
+        grid-template-columns: 1fr;
+        grid-template-areas: "crumb" "title" "tagline" "facts" "source";
+    }
+    .PP_facts{ justify-self: start; justify-content: flex-start; margin-top: 16px; }
+    .PP_source{ justify-self: start; margin-top: 12px; }
+}
+
 @media (max-width: 860px){
     .about-grid{ grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px){
     .content{ padding: 0 16px; }
+    .site-footer{ padding: 20px 16px; margin-top: 64px; }
     .site-header-inner{ padding: 10px 16px; gap: 12px; }
     .site-logo{ display: none; }
     .site-nav{ margin: 0 auto; gap: 14px; }
@@ -569,8 +647,8 @@ pre code{
     .projects{ grid-template-columns: 1fr; gap: 24px; }
     .panel{ padding: 20px; }
     .games-columns{ grid-template-columns: 1fr 1fr; }
-    body > nav{ padding: 10px 16px; }
-    .PP_project-overview{ padding: 16px; }
+    .PP_project-header{ padding-top: 28px; }
+    .PP_pager{ gap: 12px; margin-top: 48px; }
     .PP_project-section-title{ padding: 0 14px; }
     .PP_project-description-content{ padding: 0 14px; }
     .PP_project-description-content img[width]{ max-width: 100%; display: block; margin: 12px auto; }
