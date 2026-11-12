@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Project card videos only download and play while on screen,
+    // instead of every video autoplaying (and downloading) on page load.
+    const lazyVideos = document.querySelectorAll("video[data-play-when-visible]");
+    const tryPlay = video => { const p = video.play(); if (p) p.catch(() => {}); };
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) tryPlay(entry.target);
+                else entry.target.pause();
+            });
+        }, { rootMargin: "200px 0px" });
+        lazyVideos.forEach(video => observer.observe(video));
+    } else {
+        lazyVideos.forEach(tryPlay);
+    }
+
     const titles = document.querySelectorAll(".PP_project-section");
 
     titles.forEach(title => {

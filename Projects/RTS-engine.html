@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../styles.css" />
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
@@ -25,7 +25,7 @@
         </section>
 
         <section class="PP_project-overview">
-            <video loop autoplay muted controls>
+            <video loop autoplay muted controls playsinline>
                 <source src="../Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4" />
                 Your browser doesn't support the video tag.
             </video>
@@ -40,7 +40,7 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/Branch.png" alt="Git branching diagram" />
+                        <img loading="lazy" src="../Assets/Photos/Branch.png" alt="Git branching diagram" />
                         <p>As this was my first group project, it was also my first time using Git's collaboration features. Our team used <a href="https://github.com/">GitHub</a> to host the repository, with each contributor working in a separate branch.</p>
                         <p>I spent the first few weeks learning Git in-depth—getting familiar with key commands, resolving merge conflicts, and organizing branch structures for team efficiency.</p>
                     </div>
@@ -53,19 +53,19 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/baronTemp (2).png" alt="Plane agent in-game screenshot" />
+                        <img loading="lazy" src="../Assets/Photos/baronTemp (2).png" alt="Plane agent in-game screenshot" />
                         <p>My first major task was developing the agent system. The system consisted of two main parts: the agents themselves and an Agent Manager. While the implementation evolved over time, the core idea—using inheritance to represent all world entities—remained constant.</p>
                         <p>Every object in the world (trees, planes, future structures) was treated as an agent. Some could move, others were static, and each required unique behavior. To support this variety, I implemented an inheritance-based class hierarchy.</p>
-                        <img src="../Assets/Photos/RTS-Agents-Diagram.png" alt="Agent inheritance diagram" />
+                        <img loading="lazy" src="../Assets/Photos/RTS-Agents-Diagram.png" alt="Agent inheritance diagram" />
                         <p>Agents were stored in a <a href="https://en.wikipedia.org/wiki/Quadtree">quadtree</a> structure developed by another programmer, which allowed for efficient spatial queries during rendering and updates.</p>
                         
                         <div class="PP_project-code-snippet">
-<pre><code class="language-cpp">void AgentManager::PlaceMobileAgent(sf::Vector2i cell, std::set&lt;std::vector&lt;BattlefieldCell>::iterator>* gameScene, MobileAgent, agent, GameStateManager& gamestateManager)
+<pre><code class="language-cpp">void AgentManager::PlaceMobileAgent(sf::Vector2i cell, std::set&lt;std::vector&lt;BattlefieldCell&gt;::iterator&gt;* gameScene, MobileAgent, agent, GameStateManager&amp; gamestateManager)
 {
     MobileAgent* newAgent = new MobileAgent(agent);
     
     gamestateManager.getState().Units.push_back(newAgent);
-    gamestateManager.getState().Quadtree->Insert(newAgent, constants.CELL_SIZE);
+    gamestateManager.getState().Quadtree-&gt;Insert(newAgent, constants.CELL_SIZE);
 
     mobileAgent.push_back(newAgent);
 }
@@ -81,7 +81,7 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/grass_spritesheet.png" alt="Grass tile spritesheet" />
+                        <img loading="lazy" src="../Assets/Photos/grass_spritesheet.png" alt="Grass tile spritesheet" />
                         <p>I was also responsible for the isometric terrain system. While utility functions already existed to convert between world and screen space, we needed a system to associate terrain tiles in the quadtree with their texture data.</p>
                         <p>We used a combination of JSON files and a Python tool to procedurally generate maps. These files included both terrain height and type arrays.</p>
                         <p>Loading the height map:</p>
@@ -121,7 +121,7 @@
             }
 
             bool found = false;
-            for (const auto& terrainType : terrainTypes) {
+            for (const auto&amp; terrainType : terrainTypes) {
                 if (terrainType.name == thisTerrainTypeName) {
                     terrainMap[i][j] = TerrainInstance(terrainType);
                     found = true;
@@ -141,7 +141,7 @@
         }
     }
 
-    SpriteManager::GetInstance()->SetRequiredTerrainSpriteSheetList(terrainMap, size);
+    SpriteManager::GetInstance()-&gt;SetRequiredTerrainSpriteSheetList(terrainMap, size);
 }
 </code></pre>
                         </div>
@@ -152,27 +152,27 @@
 {
     directionMap = new Direction*[size];
 
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i &lt; size; i++)
     {
         directionMap[i] = new Direction[size];
-        for (int j = 0; j < size; j++)
+        for (int j = 0; j &lt; size; j++)
         {
             /////////////////////////////
             // Peak Mountain Checks
             /////////////////////////////
-            if ((i > 0 && i < size - 1 && j > 0 && j < size - 1) && (depthMap[i - 1][j] < depthMap[i][j] && depthMap[i][j - 1] < depthMap[i][j] && depthMap[i + 1][j] < depthMap[i][j] && depthMap[i][j + 1] < depthMap[i][j]))
+            if ((i &gt; 0 &amp;&amp; i &lt; size - 1 &amp;&amp; j &gt; 0 &amp;&amp; j &lt; size - 1) &amp;&amp; (depthMap[i - 1][j] &lt; depthMap[i][j] &amp;&amp; depthMap[i][j - 1] &lt; depthMap[i][j] &amp;&amp; depthMap[i + 1][j] &lt; depthMap[i][j] &amp;&amp; depthMap[i][j + 1] &lt; depthMap[i][j]))
                 directionMap[i][j] = P;
-            else if ((i == 0 && j == 0) && (depthMap[i + 1][j] < depthMap[i][j] && depthMap[i][j + 1] < depthMap[i][j]))
+            else if ((i == 0 &amp;&amp; j == 0) &amp;&amp; (depthMap[i + 1][j] &lt; depthMap[i][j] &amp;&amp; depthMap[i][j + 1] &lt; depthMap[i][j]))
                 directionMap[i][j] = P;
             //...
 
             /////////////////////////////
             // Inward angle checks
             /////////////////////////////
-            else if (i > 0 && j < size - 1 && (depthMap[i - 1][j] > depthMap[i][j] && depthMap[i][j + 1] > depthMap[i][j]))
+            else if (i &gt; 0 &amp;&amp; j &lt; size - 1 &amp;&amp; (depthMap[i - 1][j] &gt; depthMap[i][j] &amp;&amp; depthMap[i][j + 1] &gt; depthMap[i][j]))
                 directionMap[i][j] = NIW;
-            else if (i < size - 1 && j < size - 1 &&
-                     (depthMap[i + 1][j] > depthMap[i][j] && depthMap[i][j + 1] > depthMap[i][j]))
+            else if (i &lt; size - 1 &amp;&amp; j &lt; size - 1 &amp;&amp;
+                     (depthMap[i + 1][j] &gt; depthMap[i][j] &amp;&amp; depthMap[i][j + 1] &gt; depthMap[i][j]))
                 directionMap[i][j] = NIE;
             //...
         }
@@ -205,7 +205,7 @@ public:
 
 	void update(GameStateManager* gameStateManager);
 private:
-	std::vector<Agent*> nearbyAgents;
+	std::vector&lt;Agent*&gt; nearbyAgents;
 	sf::Vector2f velocity;
 	PathfinderAgent* pathfinderAgent = nullptr;
 

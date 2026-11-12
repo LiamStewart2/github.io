@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Liam Stewart - games and graphics programmer working in C++, OpenGL, DirectX 11, Unity and Unreal.">
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <title>Liam Stewart</title>
 </head>
 <body>
     <div class="content">
         <div class="intro-section">
-            <video autoplay muted loop>
+            <video autoplay muted loop playsinline>
                 <source src="Assets/Videos/Showcase.mp4" type="video/mp4">
             </video>
             <div class="top-bar">
                 <div class="top-bar-links">
-                    <a href="https://github.com/LiamStewart2"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/liam-stewart-8a7866298/"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/@liamstewart2599"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://github.com/LiamStewart2" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/liam-stewart-8a7866298/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/@liamstewart2599" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
                 <div class="top-bar-cv">
                     <a href="Assets/CV/Liam Oliver Stewart - Public.pdf">View CV</a>
@@ -36,11 +38,11 @@
             </ul>
         </div>
 
-        <div class="about-me">
+        <div class="about-me" id="about-me">
             <h3><u>Hi, I'm Liam</u></h3>
             <p>I am a 19-year-old programmer currently studying Games Programming at Staffordshire University, with a passion for low-level graphics programming.</p>
-            <p>From a young age, playing games on my dad's PC, I was always curious about how things worked; how you could place monkeys in Bloons Tower Defense 5, or how the world of Minecraft seemed to go on forever. That curiosity drives my projects and fuels my interest in building efficient, scalable systems</p>
-            <p>Outside the world of programming, I enjoy gaming, with over 4000 hours on steam alone, spending most my time in competitive shooters, factory simulations and the occasional game of pool or darts with friends and family. Additionally, i build PC's (when there isnt a ram shortage) and love to cook.</p>
+            <p>From a young age, playing games on my dad's PC, I was always curious about how things worked; how you could place monkeys in Bloons Tower Defense 5, or how the world of Minecraft seemed to go on forever. That curiosity drives my projects and fuels my interest in building efficient, scalable systems.</p>
+            <p>Outside the world of programming, I enjoy gaming, with over 4000 hours on Steam alone, spending most of my time in competitive shooters, factory simulations and the occasional game of pool or darts with friends and family. Additionally, I build PCs (when there isn't a RAM shortage) and love to cook.</p>
         </div>
         
         
@@ -49,9 +51,9 @@
             <div class="projects">
                 <a href="Projects/Luna-Engine.html" class="project">
                     <div class="video-section">
-                        <video loop autoplay muted>
+                        <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-10-05 23-19-01.mp4" type="video/mp4">
-                            Your browser doesnt support the video tag
+                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -76,9 +78,9 @@
 
                 <a href="Projects/RTS-engine.html" class="project">
                     <div class="video-section">
-                        <video loop autoplay muted>
+                        <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-05-26 17-31-58.mp4" type="video/mp4">
-                            Your browser doesnt support the video tag
+                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -103,9 +105,9 @@
 
                 <a href="Projects/voxel-renderer.html" class="project">
                     <div class="video-section">
-                        <video loop autoplay muted>
+                        <video loop muted playsinline preload="none" data-play-when-visible>
                             <source src="Assets/Videos/2025-05-15 13-25-44.mp4" type="video/mp4">
-                            Your browser doesnt support the video tag
+                            Your browser doesn't support the video tag.
                         </video>
                         <div class="project-details">
                             <div class="group-size">
@@ -132,11 +134,7 @@
             <p style="font-size:large">See my other projects <b><u><a href="projects.html">Here</a></u></b></p>
         </div>
 
-        <div class="about-me-section" id="about-me">
-            <div class="education">
-
-            </div>
-            
+        <div class="about-me-section" id="skills">
             <div class="tech-stack-section">
                 <h3><u>Tech Stack</u></h3>
                 <div class="tech-stack-list">
@@ -161,7 +159,7 @@
                 <h3><u>Favourite Games</u></h3>
                 <div class="games-list">
                     <div class="games-section">
-                        <h4><i><u>Multi-Player Games</i></u></h4>
+                        <h4><i><u>Multi-Player Games</u></i></h4>
                         <ul>
                             <li>Valorant</li>
                             <li>League Of Legends</li>

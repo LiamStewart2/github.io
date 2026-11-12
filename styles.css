@@ -48,7 +48,7 @@ body{
 }
 
 .top-bar-cv a{
-    transition: 0.2;
+    transition: 0.2s;
     color:white;
 }
 .top-bar-cv:hover a{
@@ -61,8 +61,6 @@ body{
     border:2px solid var(--hover-accent);
     box-shadow: 3px 3px 2px 1px var(--hover-accent);
 }
-
-
 
 .top-bar-links a{
     transition:0.2s;
@@ -180,7 +178,7 @@ body{
     cursor: pointer;
     min-width:100px;
     max-width:400px;
-    height:500px;
+    min-height:500px;
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
     border:2px solid white;
     border-radius: var(--bold-border-radius);
@@ -201,7 +199,6 @@ body{
     color: inherit;
     text-decoration: none;
 }
-
 
 .video-section{
     position:relative;
@@ -287,7 +284,6 @@ body{
     font-size:medium;
 }
 
-
 .tech-stack-section{
     background-color: var(--section-background);
     padding:0px;
@@ -327,7 +323,6 @@ body{
     border:2px solid var(--hover-accent);
 }
 
-
 .about-me{
     background-color: var(--section-background);
     padding:20px;
@@ -347,7 +342,6 @@ body{
     font-weight: 300;
     font-size:medium;
 }
-
 
 .my-games-list{
     background-color: var(--section-background);
@@ -399,7 +393,7 @@ body{
 
 .footer{
     display:flex;
-    justify-content: center;;
+    justify-content: center;
 }
 
 .contacts-section{
@@ -436,7 +430,6 @@ body{
     font-weight: 500;
     color:var(--hover-accent);
 }
-
 
 .PP_project-introduction-section{
     box-shadow: 8px 8px 2px 1px rgba(255, 255, 255, 0.2);
@@ -571,18 +564,12 @@ pre code{
 }
 
 pre {
-    text-align: left;  
-    white-space: pre;
+    text-align: left;
     tab-size: 4;
     font-size: 0.95rem;
-    line-height: 1.3;   
-
-    white-space: pre-wrap;   
+    line-height: 1.3;
+    white-space: pre-wrap;
     overflow-wrap: anywhere;
-    word-break: normal;
-
-    text-indent: -1em; 
-    padding-left: 1em;
 }
 
 .PP_project-description-content a{
@@ -630,9 +617,7 @@ pre {
     width: 80%;
     text-align: center;
   }
-}
 
-@media (max-width: 768px) {
   .tech-stack-list ul {
     flex-wrap: wrap;
   }
@@ -646,10 +631,7 @@ pre {
     margin: 10px 0;
     width: 90%;
   }
-}
 
-@media(max-width:768px)
-{
     .projects {
         grid-template-columns: 1fr;
         justify-items: center;      
@@ -659,8 +641,7 @@ pre {
         margin:3px;
         height:fit-content;
     }
-}
-@media (max-width: 768px) {
+
   nav {
     display: flex;
     justify-content: space-between;
@@ -675,8 +656,7 @@ pre {
     margin: 0 5px;
     text-align: center;
   }
-}
-@media (max-width: 768px) {
+
   .tech-stack-list ul {
     flex-wrap: wrap;
     justify-content: center;
@@ -688,10 +668,7 @@ pre {
     max-width: fit-content;
     text-align: center;
   }
-}
 
-@media(max-width:768px)
-{
     body::-webkit-scrollbar {
         display: none;
     }
@@ -700,4 +677,14 @@ pre {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+}
+
+a:focus-visible{
+    outline:2px solid var(--hover-accent);
+    outline-offset:3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    :root{ scroll-behavior:auto; }
+    *{ transition:none !important; }
 }

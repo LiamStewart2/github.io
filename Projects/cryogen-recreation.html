@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
@@ -24,9 +24,9 @@
 
 
         <div class="PP_project-overview">
-            <video loop autoplay muted controls>
+            <video loop autoplay muted controls playsinline>
                 <source src="../Assets/Videos/2025-06-01 22-36-59.mp4" type="video/mp4">
-                Your browser doesnt support the video tag
+                Your browser doesn't support the video tag.
             </video>
             <div class="PP_project-description">
                 <p>This was my submition for my introduction to Unity C# programming module for Staffordshire University, and features a recreation of the popular boss <a href="https://calamitymod.wiki.gg/wiki/Cryogen">Cryogen</a> from <a href="https://calamitymod.wiki.gg/">Calamity</a>. Obvious changes had to be made to support the top-down view of the game; however, all attacks and design decisions where inspired by the original boss.</p>
@@ -39,7 +39,7 @@
                     <div class="PP_project-description-content">
                         <p>The cryogen boss has 3 phases, and each where increasingly difficult. It used a simple state machine, checking whether to switch state each time it was hit, switching to the second phase at 70% health and the third phase at 35% health.</p>
                         <p>The attacks also varied in different phases. In the first phase, the only attack is the directional icicles; however, in phase 2, he unlocks a dash attack, which does damage and shoots more icicles. In phase 3, these attacks just get more intense.</p>
-                        <img src="../Assets/Photos/Cryogen.png">
+                        <img loading="lazy" src="../Assets/Photos/Cryogen.png" alt="The Cryogen boss">
                     </div>
                 </div>
 
@@ -79,11 +79,11 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>Even though the focus of the assignment was the programmng side, i wanted to add some visual effects to the game. The first effects i worked on adding where simple particle effects for numerous assets, such as the Cryogens hit effect.</p>
-                        <p>However i wanted to also use the shader graph system provided by Unity, so implemented a flash effect on enemies when they get hit.</p>
-                        <img src="../Assets/Photos/UnityShaderGraph.png">
+                        <p>Even though the focus of the assignment was the programming side, I wanted to add some visual effects to the game. The first effects I worked on adding were simple particle effects for numerous assets, such as the Cryogen's hit effect.</p>
+                        <p>However, I wanted to also use the shader graph system provided by Unity, so implemented a flash effect on enemies when they get hit.</p>
+                        <img loading="lazy" src="../Assets/Photos/UnityShaderGraph.png" alt="Hit flash effect in Unity Shader Graph">
                         <p>I also wanted a more subtle effect to enhance the "Dungeon" vibe, so added a Vignette effect.</p>
-                        <img src="../Assets/Photos/Volume.png">
+                        <img loading="lazy" src="../Assets/Photos/Volume.png" alt="Post-processing volume settings">
                     </div>
                 </div>
 
@@ -94,9 +94,9 @@
                     </div>
                     <div class="PP_project-description-content">
                         <p>Whilst not demonstrated in the video above, there is a gun inventory system implemented, allowing players to pickup, swap and unequip guns. In the demo, the player can pick open a chest, which drops a weapon the player can then walk over to pickup. the system is built in a way where if multiple chests where to be in the game, they could pick and swap their weapons by walking over them.</p>
-                        <img src="../Assets/Photos/ChestPickup.png">
+                        <img loading="lazy" src="../Assets/Photos/ChestPickup.png" alt="Chest pickup in game">
                         <p>The guns all work of a "Gun Script" component, which supports any projectile based gun, letting the developer set the weapons projectile object, shooting speeds, bullet spread and more. The component has an Update function, which is called by the character controller to run all logic for the weapons.</p>
-                        <img src="../Assets/Photos/GunScript.png">
+                        <img loading="lazy" src="../Assets/Photos/GunScript.png" alt="Gun script code">
                     </div>
                 </div>
 
@@ -106,8 +106,8 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>This project was an insightful experience of the benefits of proper project planning. My initial scope was too large to achieve in the given time frame, and in future i decided to spend dedicated time planning the life-time of a project.</p>
-                        <p>However, throughout this project i was able to utilize some of Unity's powerfull tools as shown throughout this page, and was given the perfect opportunity to research a topic that has interested me for a while.</p>
+                        <p>This project was an insightful experience of the benefits of proper project planning. My initial scope was too large to achieve in the given time frame, and in future I decided to spend dedicated time planning the life-time of a project.</p>
+                        <p>However, throughout this project I was able to utilize some of Unity's powerful tools as shown throughout this page, and was given the perfect opportunity to research a topic that has interested me for a while.</p>
                     </div>
                 </div>
 

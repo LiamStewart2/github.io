@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../styles.css">
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
@@ -26,9 +26,9 @@
 
 
         <div class="PP_project-overview">
-            <video loop autoplay muted>
+            <video loop autoplay muted playsinline>
                 <source src="../Assets/Videos/2025-05-15 13-25-44.mp4" type="video/mp4">
-                Your browser doesnt support the video tag
+                Your browser doesn't support the video tag.
             </video>
             <div class="PP_project-description">
                 <p>This was my second attempt at a voxel renderer using C++ and OpenGL. My first version lacked structure, performance, and proper architectural design. For this second attempt, I thoroughly researched the topic of voxels beforehand and properly planned how I wished to architect the project.</p>
@@ -40,7 +40,7 @@
                     <div class="PP_project-description-content">
                         <p>In my first system, each block was its own mesh. Whilst hidden faces where still culled, the renderer still issued thousands of draw calls a frame - an inefficient approach as modern GPU's are optimized for fewer, larger draw calls.</p>
                         <p>This new system bakes the mesh of each chunk at the start of run time instead. All mesh chunks are then rendered together, reducing the thousands of render calls to more like 32 or 64, depending on the render distance set in the configuration.</p>
-                        <img src="../Assets/Photos/Voxel-Renderer-Diagram.png">
+                        <img loading="lazy" src="../Assets/Photos/Voxel-Renderer-Diagram.png" alt="Voxel renderer architecture diagram">
                     </div>
                 </div>
 
@@ -50,11 +50,11 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/blockAtlas.png">    
+                        <img loading="lazy" src="../Assets/Photos/blockAtlas.png" alt="Block texture atlas">    
                         <p>Another system implemented in this version is a <a href="https://en.wikipedia.org/wiki/Texture_atlas">texture atlas</a>. This means each face of the mesh can be rendered without needing to take breaks for different voxel types.</p>
                         <p>To use this, the texture coordinates of each block would be fetched from the texture atlas instance and pushed to the chunk's mesh.</p>
                         <div class="PP_project-code-snippet">
-<pre><code class="language-cpp">chunkMesh.loadMeshData(&FaceData::TOP, glm::vec3(x, y, z), textureAtlas->getTextureCoordinateOffset(currentBlock->topTexture));
+<pre><code class="language-cpp">chunkMesh.loadMeshData(&amp;FaceData::TOP, glm::vec3(x, y, z), textureAtlas-&gt;getTextureCoordinateOffset(currentBlock-&gt;topTexture));
 </code></pre>
                         </div>
                     </div>
@@ -70,30 +70,30 @@
                         <div class="PP_project-code-snippet">
 <pre><code class="language-cpp">void Chunk::generateTerrain(PerlinNoise* terrainGenerationNoise)
 {
-	for (int x = 0; x < config::chunkWidth; x++)
+	for (int x = 0; x &lt; config::chunkWidth; x++)
 	{
-		for (int z = 0; z < config::chunkHeight; z++)
+		for (int z = 0; z &lt; config::chunkHeight; z++)
 		{
 			glm::vec3 blockWorldPosition = getBlockWorldPosition(glm::vec3(x, 0, z));
 
 			// is offset to aboid perlin noise borders - the player has to travel 128 chunks to find a perlin noise border
-			double heightValue = terrainGenerationNoise->octaveNoise((blockWorldPosition.x + config::chunkWidth * 128) / (config::chunkWidth * 1.5f), (blockWorldPosition.z + config::chunkHeight * 128) / (config::chunkHeight * 1.5f), 3, 0.6);
-			double crazyValue = terrainGenerationNoise->octaveNoise((blockWorldPosition.x + config::chunkWidth * 128) / (config::chunkWidth * 1.5f), (blockWorldPosition.z + config::chunkHeight * 128) / (config::chunkHeight * 1.5f), 2, 0.004);
+			double heightValue = terrainGenerationNoise-&gt;octaveNoise((blockWorldPosition.x + config::chunkWidth * 128) / (config::chunkWidth * 1.5f), (blockWorldPosition.z + config::chunkHeight * 128) / (config::chunkHeight * 1.5f), 3, 0.6);
+			double crazyValue = terrainGenerationNoise-&gt;octaveNoise((blockWorldPosition.x + config::chunkWidth * 128) / (config::chunkWidth * 1.5f), (blockWorldPosition.z + config::chunkHeight * 128) / (config::chunkHeight * 1.5f), 2, 0.004);
 
-			int height = (config::chunkHeight / 2) + static_cast&lt;int>((config::chunkHeight * heightValue * ((crazyValue + 1))));
+			int height = (config::chunkHeight / 2) + static_cast&lt;int&gt;((config::chunkHeight * heightValue * ((crazyValue + 1))));
 
 
-			for (int y = 0; y < config::chunkLayers; y++)
+			for (int y = 0; y &lt; config::chunkLayers; y++)
 			{
 				int index = getIndexFromRelativePosition(x, y, z);
 
 
 				if (y == height)
-					blockBuffer[index] = &BlockDatabase::Grass;
-				else if(y < height)
-					blockBuffer[index] = &BlockDatabase::Dirt;
+					blockBuffer[index] = &amp;BlockDatabase::Grass;
+				else if(y &lt; height)
+					blockBuffer[index] = &amp;BlockDatabase::Dirt;
 				else
-					blockBuffer[index] = &BlockDatabase::Air;
+					blockBuffer[index] = &amp;BlockDatabase::Air;
 			}
 		}
 	}

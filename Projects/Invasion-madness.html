@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../styles.css" />
     <script src="https://kit.fontawesome.com/56eea49a0b.js" crossorigin="anonymous"></script>
     <script src="../script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
@@ -25,7 +25,7 @@
         </section>
 
         <section class="PP_project-overview">
-            <video loop autoplay muted controls>
+            <video loop autoplay muted controls playsinline>
                 <source src="../Assets/Videos/2025-06-19 04-59-47.mp4" type="video/mp4" />
                 Your browser doesn't support the video tag.
             </video>
@@ -39,7 +39,7 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img src="../Assets/Photos/evercade.png" alt="Evercade EXP console" style="max-width:500px;">
+                        <img loading="lazy" src="../Assets/Photos/evercade.png" alt="Evercade EXP console" style="max-width:500px;">
                         <p>The game was built onto an Evercade EXP, a handheld console designed for small retro games, with very restricting specifications. This meant that throughout development I was having to take the capabilities of the device into account.</p>    
                         <p>To build my game onto the evercade, I would go through the process of pushing all code onto a linux virtual machine then onto a buildserver. I would then push the compiled files onto the evercades cartridge and SSH into the device to run the game.</p>
                         <p>This was an amazing opportunity to get hands on experience building a cross platform game. I had previously used Unities build system to build a mobile game, however unities system abstracts most of the work from the developer, and it was interesting seeing how it works behind the scene.</p>
@@ -52,7 +52,7 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>For this project, i built my first scene manager, capable of creating multiple "Scenes". A scene would be a child class of the parent scene class, having basic functions such as an Update, Render and HandleInput. These would be called by the owning SceneManager class to keep the game loop running.</p>
+                        <p>For this project, I built my first scene manager, capable of creating multiple "Scenes". A scene would be a child class of the parent scene class, having basic functions such as an Update, Render and HandleInput. These would be called by the owning SceneManager class to keep the game loop running.</p>
                         
                         <div class="PP_project-code-snippet">
 <pre><code class="language-cpp">class Scene
@@ -75,7 +75,7 @@ protected:
 </code></pre>
                         </div>
                         
-                        <p>The scene manager class would use a <a href="https://en.wikipedia.org/wiki/Singleton">singleton</a>, allowing the instance to be accessible globally through the use of static functions. The scene manager contains a LoadScene function, allowing the developer to load any class derived from the Scene class. The scene instance is stored on the heap in the scene manager and isnt moved to prevent issues with memory management.</p>
+                        <p>The scene manager class would use a <a href="https://en.wikipedia.org/wiki/Singleton">singleton</a>, allowing the instance to be accessible globally through the use of static functions. The scene manager contains a LoadScene function, allowing the developer to load any class derived from the Scene class. The scene instance is stored on the heap in the scene manager and isn't moved to prevent issues with memory management.</p>
                         <p>The scene manager then contains some "middle man" functions to run the scene from the application without having to interact with the scene instance itself.</p>
                         <div class="PP_project-code-snippet">
 <pre><code class="language-cpp">class SceneManager
@@ -110,7 +110,7 @@ private:
                         <p>This allows the developer to load scene very intuitively and simply.</p>
                         
                         <div class="PP_project-code-snippet">
-<pre><code class="language-cpp">SceneManager::instance->LoadScene(new GameScene(window, renderer));
+<pre><code class="language-cpp">SceneManager::instance-&gt;LoadScene(new GameScene(window, renderer));
 </code></pre>
                         </div>
                     </div>
@@ -122,9 +122,9 @@ private:
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>In this project, i implemented a reusable <a href="https://en.wikipedia.org/wiki/Object_pool_pattern">object pool</a> system using templates so that any object could be pooled. This sub-system was used for numerous features, such as the enemies, bullets and the particle effects.</p>
+                        <p>In this project, I implemented a reusable <a href="https://en.wikipedia.org/wiki/Object_pool_pattern">object pool</a> system using templates so that any object could be pooled. This sub-system was used for numerous features, such as the enemies, bullets and the particle effects.</p>
                         <div class="PP_project-code-snippet">
-<pre><code class="language-cpp">template &lt;class T>
+<pre><code class="language-cpp">template &lt;class T&gt;
 class Object
 {
 public:
@@ -136,7 +136,7 @@ public:
 };
 
 // Allocate on the heap to avoid issues with the linked list crashing
-template &lt;class T>
+template &lt;class T&gt;
 class ObjectPool
 {
 public:
@@ -144,29 +144,29 @@ public:
 	ObjectPool(int estimatedMax) { InitPool(estimatedMax); }
 	~ObjectPool() {}
 
-	std::vector&lt;Object&lt;T>*>* GetObjects() { return &objectsInUse; }
+	std::vector&lt;Object&lt;T&gt;*&gt;* GetObjects() { return &amp;objectsInUse; }
 	int GetNumberOfActiveObject() { return numberOfActiveObjects; }
 
 	// returns the first free object
 	// if no objects are free will add another object to the pool
-	Object&lt;T>* GetFreeObject()
+	Object&lt;T&gt;* GetFreeObject()
 	{
 		numberOfActiveObjects += 1;
-		for (int i = likelyFirstAvailable; i < buffer.Size(); i++)
+		for (int i = likelyFirstAvailable; i &lt; buffer.Size(); i++)
 		{
 			if (buffer[i].inUse == false)
 			{
 				buffer[i].inUse = true;
 				likelyFirstAvailable = i;
-				objectsInUse.push_back(&buffer[i]);
-				return &buffer[i];
+				objectsInUse.push_back(&amp;buffer[i]);
+				return &amp;buffer[i];
 			}
 		}
 		// add new object to the buffer and remove later
 
-   		Object&lt;T>* object = buffer.Push(Object&lt;T>(new T(), buffer.Size()));
+   		Object&lt;T&gt;* object = buffer.Push(Object&lt;T&gt;(new T(), buffer.Size()));
 
-		object->inUse = true;
+		object-&gt;inUse = true;
 		objectsInUse.push_back(object);
 		likelyFirstAvailable = buffer.Size() - 1;
 		
@@ -175,16 +175,16 @@ public:
 	}
 
 	// will disable the object and remove it from the objects in use list
-	void DisableObject(Object&lt;T>* object)
+	void DisableObject(Object&lt;T&gt;* object)
 	{
 		numberOfActiveObjects -= 1;
-		if(object->ID < likelyFirstAvailable)
-			likelyFirstAvailable = object->ID;
-		buffer[object->ID].inUse = false;
+		if(object-&gt;ID &lt; likelyFirstAvailable)
+			likelyFirstAvailable = object-&gt;ID;
+		buffer[object-&gt;ID].inUse = false;
 		
-		for (int i = 0; i < objectsInUse.size(); i++)
+		for (int i = 0; i &lt; objectsInUse.size(); i++)
 		{
-			if (objectsInUse[i]->ID == object->ID)
+			if (objectsInUse[i]-&gt;ID == object-&gt;ID)
 			{
 				objectsInUse.erase(objectsInUse.begin() + i);
 				return;
@@ -194,10 +194,10 @@ public:
 
 private:
 	// object buffer uses a linked list so that memory doesnt move when expanding
-	LinkedList&lt;Object&lt;T>> buffer;
+	LinkedList&lt;Object&lt;T&gt;&gt; buffer;
 
 	// track the objects currently enabled to handle Update and Render calls
-	std::vector&lt;Object&lt;T>*> objectsInUse;
+	std::vector&lt;Object&lt;T&gt;*&gt; objectsInUse;
 
 	// keeps track of the rough first available object
 	// atleast tells us the rough area of where the algorithm should start looking for an unused object
@@ -207,8 +207,8 @@ private:
 
 	void InitPool(int size)
 	{
-		for (int i = 0; i < size; i++)
-			buffer.Push(Object&lt;T>(new T(), i));
+		for (int i = 0; i &lt; size; i++)
+			buffer.Push(Object&lt;T&gt;(new T(), i));
 	}
 };
 </code></pre>
@@ -225,7 +225,7 @@ private:
                     </div>
                     <div class="PP_project-description-content">
                         <p>This project was my first time using docker tools and operating build servers to build my games to other platforms, and was a fun task to work on, seeing my game on handheld devices.</p>
-                        <p>One issue i encountered during the development of this project was not checking the compatability of libraries i used. Initially, i used JSON files to store data about my particle systems, however realised on the last week of development that <a href="https://github.com/nlohmann/json">Nlohmann's JSON library</a> wasn't compatible on the linux platform so had to rebuild the system using much simpler, C++ standard file reading.</p>
+                        <p>One issue I encountered during the development of this project was not checking the compatibility of libraries I used. Initially, I used JSON files to store data about my particle systems, however realised in the last week of development that <a href="https://github.com/nlohmann/json">Nlohmann's JSON library</a> wasn't compatible on the Linux platform so had to rebuild the system using much simpler, C++ standard file reading.</p>
                     </div>
                 </div>
 
