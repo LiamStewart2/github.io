@@ -298,9 +298,9 @@ img, video{ max-width: 100%; }
    ========================================================= */
 .about-grid{
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     gap: 32px;
-    align-items: start;
+    align-items: stretch; /* bio and tech stack panels end level */
 }
 .panel{ padding: 24px 28px; }
 .panel h3{
@@ -312,7 +312,8 @@ img, video{ max-width: 100%; }
     margin: 0 0 16px;
 }
 .about-text p:last-child{ margin-bottom: 0; }
-.about-side{ display: grid; gap: 32px; }
+/* Favourite games: full-width row under the bio + tech stack */
+.games-panel{ grid-column: 1 / -1; }
 
 .stack-group{ margin-bottom: 16px; }
 .stack-group:last-child{ margin-bottom: 0; }
@@ -340,16 +341,25 @@ img, video{ max-width: 100%; }
 
 .games-columns{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+/* each group is one line: label, then the games wrapping alongside it */
+.games-columns > div{
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    align-items: baseline;
     gap: 16px;
 }
 .games-columns h4{
-    margin: 0 0 6px;
+    margin: 0;
     font-size: 14px;
     color: var(--muted);
     font-weight: 400;
 }
 .games-columns ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 22px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -646,7 +656,7 @@ pre code{
     .section{ padding-top: 64px; }
     .projects{ grid-template-columns: 1fr; gap: 24px; }
     .panel{ padding: 20px; }
-    .games-columns{ grid-template-columns: 1fr 1fr; }
+    .games-columns > div{ grid-template-columns: 1fr; gap: 4px; }
     .PP_project-header{ padding-top: 28px; }
     .PP_pager{ gap: 12px; margin-top: 48px; }
     .PP_project-section-title{ padding: 0 14px; }
