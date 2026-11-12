@@ -49,7 +49,7 @@
 
 
             <div class="PP_project-description">
-                <p>This is my 3D game engine built using C++. It is still frequently built upon, but already features core aspects of engine architecture commonly utilized in many modern game engines. This is a long-term passion project of mine, which serves as a sandbox for learning new libraries and algorithms.</p>
+                <p>Luna is my long-running game engine and editor, written in C++. It started out on OpenGL, moved to DirectX 11 during my Realtime Rendering module, and has since grown a PBR renderer, rigid body physics, Lua scripting and a project-based editor. It's my sandbox for learning how engines work under the hood.</p>
 
                 <div class="PP_section-toolbar">
                     <button type="button" class="PP_expand-all">Expand all</button>
@@ -57,42 +57,27 @@
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Entity Component System (ECS)</u></h3>
+                        <h3>Renderer Architecture</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <img loading="lazy" src="../Assets/Photos/ECS_Simple_Layout.svg.png" alt="Entity component system layout diagram" />
-                        <p>This game engine functions on an <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a>, where game objects are composed of numerous components, using the game object's ID to reference grouped components. This approach is far superior in terms of cache friendliness, as the CPU can load the array of components as contiguous chunks of memory instead of individually grabbing each piece of data.</p>    
-                        <p>These components are then used by whatever system needs them. For example, the Rendering System would need access to a list of the mesh components and the transform components.</p>
+                        <p>Luna's renderer was originally written in OpenGL. When I moved it to DirectX 11 during my Realtime Rendering module, rather than doing a straight port, I put the graphics API behind a set of interfaces so the rest of the engine never talks to DirectX directly.</p>
+                        <img loading="lazy" src="../Assets/Photos/luna-renderer-architecture.svg" alt="Renderer architecture: the renderer uses API-agnostic interfaces (IRendererAPI, IRendererContext, IFramebuffer, IShader, IMesh, ITexture), each implemented by a DirectX 11 class">
+                        <p>Each interface has a static <code>Create()</code> factory that returns the implementation for the active API. The OpenGL backend has since been retired, so DirectX 11 is the only implementation today, but adding another backend means implementing these interfaces rather than rewriting the renderer.</p>
 
                         <div class="PP_project-code-snippet">
-<pre><code class="language-cpp">void ReworkedRenderer::Render(SceneManager* sceneManager, IFramebuffer* framebuffer, ObjectTransformPairing&lt;Camera&gt;* camera)
+<pre><code class="language-cpp">std::shared_ptr&lt;IFramebuffer&gt; IFramebuffer::Create(const FramebufferSpecification&amp; spec)
 {
-	framebuffer-&gt;Bind();
-
-	Scene* scene = sceneManager-&gt;GetCurrentScene();
-	EntityComponentSystem* ECS = scene-&gt;GetECS();
-
-	std::unordered_map&lt;unsigned int, MeshComponent&gt;&amp; meshComponents = ECS-&gt;GetAllComponentsOfType&lt;MeshComponent&gt;();
-	std::unordered_map&lt;unsigned int, Transform&gt;&amp; transforms = ECS-&gt;GetAllComponentsOfType&lt;Transform&gt;();
-	for (auto&amp; [id, meshComponent] : meshComponents)
+	switch (IRendererAPI::GetAPI())
 	{
-		auto transformIt = transforms.find(meshComponent.gameObject);
-		if (transformIt != transforms.end())
-		{
-			// Bind mesh data and textures
-            meshComponent.mesh-&gt;BindMesh();
-            // ...
-
-			s_RendererAPI-&gt;RenderIndexed(meshComponent.mesh-&gt;GetIndexCount(), &amp;transformIt-&gt;second);
-
-			meshComponent.shader-&gt;Unbind();
-		}
+		case RendererAPIType::DirectX11:
+			return std::make_shared&lt;DX11Framebuffer&gt;(spec);
+		case RendererAPIType::OpenGL:
+			std::cerr &lt;&lt; "RendererAPI::OpenGL is currently not supported!\n";
+			return nullptr;
 	}
-
-	RenderSkybox(sceneManager, framebuffer);
-
-	framebuffer-&gt;Unbind();
+	std::cerr &lt;&lt; "Unknown RendererAPI!\n";
+	return nullptr;
 }
 </code></pre>
                         </div>
@@ -101,66 +86,216 @@
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>API-Agnostic Render Architecture</u></h3>
+                        <h3>PBR Shading</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>During my Realtime Rendering module, I was allowed to rework my render pipeline to support DirectX 11. Instead of a simple port, I chose to design an API-agnostic architecture; making it easier to integrate additional backends like OpenGL in the future without major rewrites.</p>
-                        <img loading="lazy" src="../Assets/Photos/RendererAPI.png" alt="Renderer API abstraction diagram">
-                        <p>My approach was to define interfaces for core graphical objects such as Meshes and Textures, alongside a higher-level Render API interface responsible for combining and managing API-specific operations like constant buffer and uniform handling as shown above.</p>
-                        <p> Currently, the engine only supports DirectX 11, but I plan to expand it in the future to include other graphics APIs such as OpenGL and to experiment with more modern options like Vulkan and DirectX 12.</p>
+                        <p>Objects are shaded with a <a href="https://learnopengl.com/PBR/Theory">physically based</a> Cook-Torrance BRDF, using a metallic/roughness workflow with albedo, roughness, metallic, normal and ambient occlusion maps. It's the default shader for every new object.</p>
+                        <p>The specular term combines the GGX normal distribution function, Smith's geometry function (Schlick-GGX) and the Fresnel-Schlick approximation. Normal maps are applied in tangent space, and the final colour is tonemapped from HDR with Reinhard and gamma corrected.</p>
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">float3 F0 = 0.04;
+F0 = lerp(F0, albedo, metallic);
+
+float3 L = normalize(-LightDirection);
+float3 H = normalize(V + L); // the halfway vector
+float3 radiance = LightColour;
+
+// Cook-Torrance BRDF
+float NDF = DistributionGGX(N, H, roughness);
+float G = GeometrySmith(N, V, L, roughness);
+float3 F = FresnelSchlick(max(dot(H, V), 0.0), F0);
+
+float3 numerator = NDF * G * F;
+float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0001);
+float3 specular = numerator / denominator;
+
+float3 kS = F; // specular is equal to the fresnel
+float3 kD = (float3) 1.0f - kS; // specular + diffuse = 1, so diffuse = 1 - specular
+kD *= 1.0 - metallic; // pure metals have no diffuse factor
+
+Lo += (kD * albedo + specular) * radiance * max(dot(N, L), 0.0);
+</code></pre>
+                        </div>
                     </div>
                 </div>
 
-
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Cascading Shadow Mapping</u></h3>
+                        <h3>Shadow Mapping</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>The first effect I built on top of this game engine where shadows. To achieve this effect, I utilised <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow mapping</a>, a technique where the scene is rendered from the perspective of the light.</p>
-                        <p>However, unlike when rendering the scene to the camera, we are only interested in the pixel's distance from the camera, which is conveniently stored for us in the Z depth buffer. This buffer is then sampled to calculate whether the pixel currently being rendered in the shader is hidden from the light source or not.</p>
-                        <img loading="lazy" width="300" src="../Assets/Photos/withShadowMapping.png" alt="Scene with shadow mapping"><img loading="lazy" width="300" src="../Assets/Photos/WithoutShadowMapping.png" alt="Scene without shadow mapping">
-                        <p>Pure shadow mapping with no optimisations, however, can have a very costly hit to performance. If you want more defined shadows when zooming in close without having an insanely high resolution shadow buffer texture, then a more complex method is required - <a href="https://learnopengl.com/Guest-Articles/2021/CSM">Cascading Shadow Mapping</a></p>
-                        <p>CSM allows the lighting matrices to change depending on the distance between the camera and the given pixel, focusing the shadow buffer texture to the limits of the view frustum. This allows us to create higher quality shadows without increasing the resolution of the shadow textures.</p>
-                        <img loading="lazy" src="../Assets/Photos/frustum_fitting.png" alt="Shadow map frustum fitting diagram">
+                        <p>Shadows use <a href="https://en.wikipedia.org/wiki/Shadow_mapping">shadow mapping</a>. Each frame, the scene is first rendered from the directional light's point of view into a 2048&times;2048 depth buffer, using an orthographic projection since a directional light's rays are parallel. In the main pass, each pixel is transformed into the light's space and compared against that depth buffer to decide whether it's hidden from the light.</p>
+                        <p>A single depth comparison gives hard, jagged edges, so the shader takes a 5&times;5 grid of samples around each pixel (percentage-closer filtering) and averages them to soften the shadow.</p>
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">float currentDepth = input.FragPositionLightSpace.z / input.FragPositionLightSpace.w;
+
+float width = 0;
+float height = 0;
+shadowMap.GetDimensions(width, height);
+float2 texelSize = 1.0 / float2(width, height);
+
+float shadow = 0;
+for (int x = -2; x &lt;= 2; ++x)
+{
+    for (int y = -2; y &lt;= 2; ++y)
+    {
+        float closestDepth = shadowMap.Sample(shadowSampler, projCoords + (float2(x, y) * texelSize)).r;
+        shadow += currentDepth &gt; closestDepth ? 1.0 : 0.0;
+    }
+}
+shadow /= 25;
+</code></pre>
+                        </div>
+
+                        <p>The original OpenGL version of Luna used <a href="https://learnopengl.com/Guest-Articles/2021/CSM">cascaded shadow maps</a>, which split the view frustum into several shadow maps so shadows close to the camera stay sharp. Cascades haven't been ported to the DirectX 11 renderer, so it currently uses a single shadow map with a fixed frustum.</p>
                     </div>
                 </div>
 
-                
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Scene Graph</u></h3>
+                        <h3>Rigid Body Physics</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>Luna has its own rigid body physics, built during my physics module. Objects with a PhysicsComponent are affected by gravity, drag and applied forces, and can rotate under torque using an inertia tensor, with their orientation stored as a quaternion.</p>
+                        <p>Collision shapes come from a ColliderComponent, either a sphere or an oriented bounding box. Sphere&ndash;sphere, sphere&ndash;box and box&ndash;box collisions are supported. Box&ndash;box uses the <a href="https://en.wikipedia.org/wiki/Hyperplane_separation_theorem">separating axis theorem</a>, testing all 15 candidate axes and keeping the one with the smallest overlap as the collision normal.</p>
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">float minPenetration = FLT_MAX;
+glm::vec3 bestAxis;
+
+bool colliding = true;
+for (glm::vec3 v : axis)
+{
+	v = glm::normalize(v);
+
+	// project both boxes onto the axis
+	float rA = (collider1-&gt;m_ColliderSize.x * transform1-&gt;scale.x) * glm::abs(glm::dot(v, o1[0])) +
+	           (collider1-&gt;m_ColliderSize.y * transform1-&gt;scale.y) * glm::abs(glm::dot(v, o1[1])) +
+	           (collider1-&gt;m_ColliderSize.z * transform1-&gt;scale.z) * glm::abs(glm::dot(v, o1[2]));
+	float rB = (collider2-&gt;m_ColliderSize.x * transform2-&gt;scale.x) * glm::abs(glm::dot(v, o2[0])) +
+	           (collider2-&gt;m_ColliderSize.y * transform2-&gt;scale.y) * glm::abs(glm::dot(v, o2[1])) +
+	           (collider2-&gt;m_ColliderSize.z * transform2-&gt;scale.z) * glm::abs(glm::dot(v, o2[2]));
+
+	float d = glm::abs(glm::dot(transform1-&gt;position - transform2-&gt;position, v));
+
+	float penetration = (rA + rB) - d;
+	if (penetration &lt; 0.0f)
+	{
+		colliding = false; // found a separating axis
+		break;
+	}
+
+	if (penetration &lt; minPenetration)
+	{
+		minPenetration = penetration;
+		bestAxis = v;
+	}
+}
+if (colliding)
+	CollisionResponse(ECS, id, id2, bestAxis, minPenetration, deltaTime);
+</code></pre>
+                        </div>
+
+                        <p>Collisions are resolved with an impulse based on both objects' masses and restitution, followed by a positional correction to push them apart. I also experimented with angular collision response, but cut it as it was too complex for the time I had.</p>
+                        <p>Objects can be moved with the editor gizmos while the simulation is running; the physics system pauses an object while it's being dragged.</p>
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3>Entity Component System (ECS)</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <img loading="lazy" src="../Assets/Photos/ECS_Simple_Layout.svg.png" alt="Entity component system layout diagram" />
+                        <p>Game objects in Luna are just IDs. Their data lives in components (Transform, Mesh, Light, Camera, Script, Physics, Collider and so on), and each component type is stored in its own pool, keyed by the object's ID.</p>
+                        <p>Systems only touch the pools they need. For example, the renderer iterates the mesh components and looks up each one's transform, while the physics system works through the physics and collider components.</p>
+                        <p>The pools are currently hash maps, which keeps lookups simple but doesn't store components contiguously in memory. Switching to densely packed arrays (a sparse set) would make iterating them much more cache-friendly.</p>
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">std::unordered_map&lt;unsigned int, MeshComponent&gt;&amp; meshComponents = ECS-&gt;GetAllComponentsOfType&lt;MeshComponent&gt;();
+std::unordered_map&lt;unsigned int, Transform&gt;&amp; transforms = ECS-&gt;GetAllComponentsOfType&lt;Transform&gt;();
+for (auto&amp; [id, meshComponent] : meshComponents)
+{
+	auto transformIt = transforms.find(meshComponent.gameObject);
+	if (transformIt != transforms.end())
+	{
+		meshComponent.shader-&gt;Bind();
+		meshComponent.mesh-&gt;BindMesh();
+
+		// bind the material's texture maps
+		if (meshComponent.material-&gt;m_Albedo != nullptr)
+			meshComponent.material-&gt;m_Albedo-&gt;BindTexture(0);
+		// ... specular, normal, metallic and AO maps
+
+		ShadowRenderer::GetLightFramebuffer()-&gt;BindDepthBufferAsTexture(2);
+
+		s_RendererAPI-&gt;RenderIndexed(meshComponent.mesh-&gt;GetIndexCount(),
+		                             &amp;transformIt-&gt;second, meshComponent.material);
+
+		meshComponent.shader-&gt;Unbind();
+	}
+}
+</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3>Scene Graph</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
                         <p>
-                            The engine uses a <a href="https://en.wikipedia.org/wiki/Scene_graph">Scene Graph</a> to define parent–child relationships between objects. 
+                            The engine uses a <a href="https://en.wikipedia.org/wiki/Scene_graph">Scene Graph</a> to define parent–child relationships between objects.
                             This allows transformations such as position, rotation, and scale to automatically propagate from a parent to its children, making it easy to build complex objects from smaller parts (e.g., a car body with wheel entities attached).
                         </p>
                         <p>
-                            The Scene Graph works alongside the ECS: entities still hold their own components, but their local transforms are resolved into world transforms through the hierarchy. 
+                            The Scene Graph works alongside the ECS: entities still hold their own components, but their local transforms are resolved into world transforms through the hierarchy.
                             This ensures efficient rendering and physics updates while keeping the engine flexible and easy to extend.
                         </p>
                         <img loading="lazy" src="../Assets/Photos/SceneGraph ownership.png" alt="Scene graph hierarchy diagram">
                     </div>
                 </div>
-                
+
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>Scripting</u></h3>
+                        <h3>Lua Scripting</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
                         <p>The engine also features Lua Scripting, allowing users to write and maintain code to create complex gameplay features.
                             I am currently using Sol2 bindings to allow the game engine to interact with script files, which greatly simplifies the process of compiling and running scripts.
-                            Whilst developing the scripting feature, I tested numerous other languages such as python and C#, however found that Lua fit the lightweight style I was looking for.
+                            Whilst developing the scripting feature, I tested numerous other languages such as Python and C#, however found that Lua fit the lightweight style I was looking for.
                         </p>
                         <img loading="lazy" src="../Assets/Photos/Lua_language.webp" alt="Lua logo" style="max-width: 150px; border:0; box-shadow: 0 0 0;">
-                        <p>Scripts are treated as an asset, being stored in the asset manager and, similarly to meshes, are referenced in a dedicated component; ScriptComponent. This allows me to access the corresponding scripts for each object. Only one instance of a script is active at a time, and it just passes the object ID of which object should be affected by the changes being made in the script. Currently, an object can only have 1 script at a time, but I hope to find a workaround to this issue soon.</p>
-                        <p>Below is the code for loading different scripts. A lot of the code is error checking, due to the nature of scripting languages. In sol, calling a stored function is no different to calling a standard c++ function.
-                        </p>
+                        <p>Scripts are treated as assets and referenced by a ScriptComponent, with one script per object. A script defines an <code>Update</code> function, and calls back into the engine through bound functions to move objects, apply forces, set velocities and read input. Scripts also hot-reload: each frame the engine checks whether a script has changed on disk and recompiles it, so gameplay can be tweaked without restarting the editor.</p>
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-lua">function Update()
+	movementSpeed = 50;
+	if(IsKeyDown("a")) then
+		AddForce(-movementSpeed, 0, 0)
+	end
+	if(IsKeyDown("d")) then
+		AddForce(movementSpeed, 0, 0)
+	end
+	if(IsKeyDown("w")) then
+		AddForce(0, 0, -movementSpeed);
+	end
+	if(IsKeyDown("s")) then
+		AddForce(0, 0, movementSpeed);
+	end
+end
+</code></pre>
+                        </div>
+
+                        <p>Below is the code for compiling a script. A lot of it is error checking, due to the nature of scripting languages. In Sol2, calling a stored function is no different to calling a standard C++ function.</p>
 
                         <div class="PP_project-code-snippet">
 <pre><code class="language-cpp">void Script::Compile(std::string filepath)
@@ -174,7 +309,7 @@
 
 	m_CompiledScript = m_Lua.load_file(filepath);
 
-	if (!m_CompiledScript.valid()) 
+	if (!m_CompiledScript.valid())
 	{
 		sol::error err = m_CompiledScript;
 		std::cerr &lt;&lt; "[SCRIPT] " &lt;&lt; m_Filepath &lt;&lt; " filepath failed to compile: " &lt;&lt; err.what() &lt;&lt; std::endl;
@@ -201,21 +336,69 @@
 
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3><u>ImGui Integration</u></h3>
+                        <h3>Editor</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>
-                            The engine includes <a href="https://github.com/ocornut/imgui">Dear ImGui</a> for creating in-engine tools and debug interfaces. 
-                            ImGui makes it easy to inspect data, display performance stats, and tweak values such as lighting or camera settings in real time 
-                            without restarting or recompiling the engine.
-                        </p>
-                        <p>
-                            I have also set up ImGui’s docking and viewport features, allowing windows to be rearranged and even popped out into separate windows, 
-                            similar to professional editors. This provides a flexible foundation for building a scene editor and other development tools directly 
-                            inside the engine.
-                        </p>
-                        <img loading="lazy" src="../Assets/Photos/ImguiDocking.png" alt="ImGui docking demo screenshot">
+                        <p>Luna comes with an editor built on <a href="https://github.com/ocornut/imgui">Dear ImGui</a>, using its docking and viewport features so panels can be rearranged or popped out into separate windows, similar to professional editors. It includes:</p>
+                        <ul>
+                            <li>A <strong>Scene</strong> view with a free-flying editor camera and translate, rotate and scale gizmos (<a href="https://github.com/CedricGuillemet/ImGuizmo">ImGuizmo</a>), plus a separate <strong>Game</strong> view rendered from the scene's main camera, with play and stop.</li>
+                            <li><strong>Hierarchy</strong> and <strong>Inspector</strong> panels for creating objects and editing their components.</li>
+                            <li>A <strong>Content Browser</strong> for navigating, creating and deleting assets, which can be dragged straight into the inspector.</li>
+                            <li>A node-based <strong>Material Editor</strong>: drag in a material, connect texture nodes to its albedo, roughness, normal, metallic and AO inputs, and save it as a material asset.</li>
+                            <li><strong>Projects</strong>: the editor opens <code>.luna</code> project files, and new projects can be created from inside the editor, starting with a template scene (camera, light and floor) and a set of default assets.</li>
+                        </ul>
+                        <p>A shader graph editor is in progress, built on the same node editor as the material editor.</p>
+                    </div>
+                </div>
+                <div class="PP_project-section">
+                    <div class="PP_project-section-title">
+                        <h3>Job System (In Progress)</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="PP_project-description-content">
+                        <p>I'm currently building a job system to move work off the main thread, starting with asset loading. A <code>JobManager</code> starts a fixed pool of worker threads that pull work from a shared queue. Each job is a small class with a <code>Work()</code> function, paired with a package holding the data it needs.</p>
+                        <p>The queue is a two-lock concurrent queue: a linked list with a dummy head node and separate locks for the front and back, so one thread can push work while another pops it without fighting over the same lock.</p>
+
+                        <div class="PP_project-code-snippet">
+<pre><code class="language-cpp">void Push(T object)
+{
+	ConcurrentQueueNode&lt;T&gt;* nextNode = new ConcurrentQueueNode&lt;T&gt;();
+	nextNode-&gt;m_Data = object;
+
+	m_BackLock.lock();
+
+	m_BackNode-&gt;m_Next = nextNode;
+	m_BackNode = nextNode;
+
+	m_BackLock.unlock();
+}
+
+bool Pop(T&amp; object)
+{
+	m_FrontLock.lock();
+
+	ConcurrentQueueNode&lt;T&gt;* frontNode = m_FrontNode;
+	ConcurrentQueueNode&lt;T&gt;* newFrontNode = frontNode-&gt;m_Next;
+
+	if (newFrontNode == nullptr)
+	{
+		m_FrontLock.unlock();
+		return false;
+	}
+
+	object = newFrontNode-&gt;m_Data;
+	m_FrontNode = newFrontNode;
+
+	m_FrontLock.unlock();
+	delete frontNode;
+	return true;
+}
+</code></pre>
+                        </div>
+
+                        <p>For asset loading, meshes and textures are now referenced through handles that track whether they're unloaded, loading or loaded. Worker threads parse OBJ files and decode textures into CPU-side buffers, then the main thread creates the GPU resources from a queue of finished loads. The renderer skips anything that isn't loaded yet, so a scene fills in as its assets arrive instead of the editor freezing while they load.</p>
+                        <p>This lives on a separate branch for now while I finish it.</p>
                     </div>
                 </div>
 

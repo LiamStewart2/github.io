@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 350" font-family="JetBrains Mono, Consolas, monospace">
+  <title>Luna Engine renderer architecture: the renderer talks to API-agnostic interfaces, each implemented by a DirectX 11 class</title>
+  <rect width="980" height="350" fill="#0e0e0e"/>
+
+  <!-- connectors: renderer -> interfaces -->
+  <g stroke="#6b6b6b" stroke-width="1.5" fill="none">
+    <path d="M490 64 V92"/>
+    <path d="M84 92 H889"/>
+    <path d="M84 92 V120 M245 92 V120 M406 92 V120 M567 92 V120 M728 92 V120 M889 92 V120"/>
+    <!-- interfaces -> DX11 implementations -->
+    <path d="M84 164 V210 M245 164 V210 M406 164 V210 M567 164 V210 M728 164 V210 M889 164 V210"/>
+  </g>
+
+  <!-- engine-facing renderer -->
+  <rect x="380" y="20" width="220" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+  <text x="490" y="47" fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">Renderer</text>
+
+  <!-- API-agnostic interfaces -->
+  <g font-size="13" font-weight="700" text-anchor="middle" fill="#90ff64">
+    <rect x="10"  y="120" width="148" height="44" rx="3" fill="#141414" stroke="#90ff64" stroke-width="2"/>
+    <rect x="171" y="120" width="148" height="44" rx="3" fill="#141414" stroke="#90ff64" stroke-width="2"/>
+    <rect x="332" y="120" width="148" height="44" rx="3" fill="#141414" stroke="#90ff64" stroke-width="2"/>
+    <rect x="493" y="120" width="148" height="44" rx="3" fill="#141414" stroke="#90ff64" stroke-width="2"/>
+    <rect x="654" y="120" width="148" height="44" rx="3" fill="#141414" stroke="#90ff64" stroke-width="2"/>
+    <rect x="815" y="120" width="148" height="44" rx="3" fill="#141414" stroke="#90ff64" stroke-width="2"/>
+    <text x="84"  y="147">IRendererAPI</text>
+    <text x="245" y="147">IRendererContext</text>
+    <text x="406" y="147">IFramebuffer</text>
+    <text x="567" y="147">IShader</text>
+    <text x="728" y="147">IMesh</text>
+    <text x="889" y="147">ITexture</text>
+  </g>
+
+  <!-- DirectX 11 implementations -->
+  <g font-size="12" text-anchor="middle" fill="#ffffff">
+    <rect x="10"  y="210" width="148" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+    <rect x="171" y="210" width="148" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+    <rect x="332" y="210" width="148" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+    <rect x="493" y="210" width="148" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+    <rect x="654" y="210" width="148" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+    <rect x="815" y="210" width="148" height="44" rx="3" fill="#141414" stroke="#ffffff" stroke-width="2"/>
+    <text x="84"  y="236">DX11RendererAPI</text>
+    <text x="245" y="236">DX11RendererContext</text>
+    <text x="406" y="236">DX11Framebuffer</text>
+    <text x="567" y="236">DX11Shader</text>
+    <text x="728" y="236">DX11Mesh</text>
+    <text x="889" y="236">DX11Texture</text>
+  </g>
+
+  <!-- other backends -->
+  <rect x="10" y="280" width="953" height="44" rx="3" fill="none" stroke="#6b6b6b" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="486" y="307" fill="#a6a6a6" font-size="13" text-anchor="middle">other backends implement the same interfaces</text>
+</svg>
