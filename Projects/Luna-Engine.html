@@ -353,11 +353,11 @@ end
                 </div>
                 <div class="PP_project-section">
                     <div class="PP_project-section-title">
-                        <h3>Job System (In Progress)</h3>
+                        <h3>Job System</h3>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="PP_project-description-content">
-                        <p>I'm currently building a job system to move work off the main thread, starting with asset loading. A <code>JobManager</code> starts a fixed pool of worker threads that pull work from a shared queue. Each job is a small class with a <code>Work()</code> function, paired with a package holding the data it needs.</p>
+                        <p>Luna Engine features a job system to move work off the main thread, starting with asset loading. A <code>JobManager</code> starts a fixed pool of worker threads that pull work from a shared queue. Each job is a small class with a <code>Work()</code> function, paired with a package holding the data it needs.</p>
                         <p>The queue is a two-lock concurrent queue: a linked list with a dummy head node and separate locks for the front and back, so one thread can push work while another pops it without fighting over the same lock.</p>
 
                         <div class="PP_project-code-snippet">
@@ -397,8 +397,7 @@ bool Pop(T&amp; object)
 </code></pre>
                         </div>
 
-                        <p>For asset loading, meshes and textures are now referenced through handles that track whether they're unloaded, loading or loaded. Worker threads parse OBJ files and decode textures into CPU-side buffers, then the main thread creates the GPU resources from a queue of finished loads. The renderer skips anything that isn't loaded yet, so a scene fills in as its assets arrive instead of the editor freezing while they load.</p>
-                        <p>This lives on a separate branch for now while I finish it.</p>
+                            <p>For asset loading, meshes and textures are now referenced through handles that track whether they're unloaded, loading or loaded. Worker threads parse OBJ files and decode textures into CPU-side buffers, then the main thread creates the GPU resources from a queue of finished loads. The renderer skips anything that isn't loaded yet, so a scene fills in as its assets arrive instead of the editor freezing while they load.</p><dfn></dfn>
                     </div>
                 </div>
 
